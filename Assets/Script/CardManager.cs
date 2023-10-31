@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    //tes
+    //tis
     public List<GameObject> allCards;
     public List<GameObject> listPlayer;
 
