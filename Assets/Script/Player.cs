@@ -11,9 +11,13 @@ public class Player : MonoBehaviour
     private int previousChildCount = 0;
     public int score = 0;
 
+    public bool isBot;
+    public BotBeheaviour botBeheaviour;
+
     void Start()
     {
         PopulateCardIDs();
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
     }
 
     public void PopulateCardIDs()
@@ -49,6 +53,43 @@ public class Player : MonoBehaviour
             }
         }
 
+    }
+
+    public void ShuffleCardPositions()
+    {
+        int cardCount = transform.childCount;
+        List<Transform> cardsTransforms = new List<Transform>();
+
+        // Collect all card transforms
+        for (int i = 0; i < cardCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            cardsTransforms.Add(child);
+        }
+
+        // Shuffle the card transforms
+        for (int i = 0; i < cardCount; i++)
+        {
+            int randomIndex = Random.Range(i, cardCount);
+            Transform temp = cardsTransforms[i];
+            cardsTransforms[i] = cardsTransforms[randomIndex];
+            cardsTransforms[randomIndex] = temp;
+        }
+
+        // Apply the shuffled positions
+        for (int i = 0; i < cardCount; i++)
+        {
+            Transform cardTransform = cardsTransforms[i];
+            Vector3 localPosition = Vector3.zero;
+            localPosition.x = i * 1f;
+            localPosition.y = 0f;
+            localPosition.z = 0f;
+
+            Quaternion localRotation = Quaternion.identity;
+
+            cardTransform.localPosition = localPosition;
+            cardTransform.localRotation = localRotation;
+        }
     }
 
 
@@ -118,6 +159,12 @@ public class Player : MonoBehaviour
                 cardButton.interactable = true;
             }
         }
+
+        /*if(isBot)
+        {
+            Invoke("BotGetInteractableButton", 6f);
+            botBeheaviour.ClickRandomButton();
+        }*/
     }
 
     public void SetChildCardNotInteractable()
@@ -131,5 +178,15 @@ public class Player : MonoBehaviour
                 cardButton.interactable = false;
             }
         }
+    }
+
+    public void BotGetInteractableButton()
+    {
+        botBeheaviour.GetInteractableButton();
+    }
+
+    public void BotPressedButton()
+    {
+        botBeheaviour.ClickRandomButton();
     }
 }

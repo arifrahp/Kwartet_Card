@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class CardObject : MonoBehaviour
 {
+    public Image cardImage;
+
     public GameObject player1;
     public GameObject player2;
     public GameObject player3;
@@ -22,6 +24,7 @@ public class CardObject : MonoBehaviour
 
     private PlayManager playManager;
     private Player player;
+    public BotBeheaviour botBeheaviour;
     private void Start()
     {
         //cardTouchButton = GetComponentInChildren<Button>();
@@ -32,11 +35,21 @@ public class CardObject : MonoBehaviour
         player3 = GameObject.Find("Player3");
         player4 = GameObject.Find("Player4");
         questionPanel.SetActive(false);
+
+        cardImage = GetComponentInChildren<Image>();
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
     }
 
     void Update()
     {
-
+        if (player.isBot)
+        {
+            cardImage.color = Color.black;
+        }
+        if (!player.isBot)
+        {
+            cardImage.color = Color.white;
+        }
     }
 
     public void OnPressedTest()
@@ -46,7 +59,7 @@ public class CardObject : MonoBehaviour
 
     public IEnumerator DeactivateQuestionPanel()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         questionPanel.SetActive(false);
         transitionPanel.SetActive(false);
     }
@@ -261,5 +274,10 @@ public class CardObject : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void BotGetInteractableButton()
+    {
+        botBeheaviour.GetInteractableButton();
     }
 }

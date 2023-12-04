@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -39,6 +40,12 @@ public class PlayManager : MonoBehaviour
     public Dictionary<Player, int> playerScores = new Dictionary<Player, int>();
     public List<Player> allPlayers = new List<Player>();
 
+    public Player player1;
+    public Player player2;
+    public Player player3;
+    public Player player4;
+    private BotBeheaviour botBeheaviour;
+
     public enum State
     {
         Initialization,
@@ -53,6 +60,7 @@ public class PlayManager : MonoBehaviour
     {
         state = State.Initialization;
 
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject playerObject in playerObjects)
@@ -93,6 +101,12 @@ public class PlayManager : MonoBehaviour
                         player4HaveChooseCard = false;
                         player4HaveGuessCard = false;
 
+                        Player[] players = FindObjectsOfType<Player>();
+                        foreach (Player player in players)
+                        {
+                            player.ShuffleCardPositions();
+                        }
+
                         roundCount += 1;
                         isAddUp = true;
                     }
@@ -111,14 +125,26 @@ public class PlayManager : MonoBehaviour
             case State.Player1Turn:
                 if (!player1HaveCheckCard)
                     player1CheckCard.Invoke();
-                
-                if(player1HaveCheckCard && player1HaveChooseCard && player1HaveGuessCard)
+
+                /*if (player1.isBot)
+                {
+                    Invoke("BotGetInteractableButton", 6f);
+                    botBeheaviour.ClickRandomButton();
+                }*/
+
+                if (player1HaveCheckCard && player1HaveChooseCard && player1HaveGuessCard)
                     state = State.Player2Turn;
                 break;
 
             case State.Player2Turn:
                 if (!player2HaveCheckCard)
                     player2CheckCard.Invoke();
+
+                /*if (player2.isBot)
+                {
+                    Invoke("BotGetInteractableButton", 6f);
+                    botBeheaviour.ClickRandomButton();
+                }*/
 
                 if (player2HaveCheckCard && player2HaveChooseCard && player2HaveGuessCard)
                     state = State.Player3Turn;
@@ -128,6 +154,12 @@ public class PlayManager : MonoBehaviour
                 if (!player3HaveCheckCard)
                     player3CheckCard.Invoke();
 
+                /*if (player3.isBot)
+                {
+                    Invoke("BotGetInteractableButton", 6f);
+                    botBeheaviour.ClickRandomButton();
+                }*/
+
                 if (player3HaveCheckCard && player3HaveChooseCard && player3HaveGuessCard)
                     state = State.Player4Turn;
                 break;
@@ -135,6 +167,12 @@ public class PlayManager : MonoBehaviour
             case State.Player4Turn:
                 if (!player4HaveCheckCard)
                     player4CheckCard.Invoke();
+
+                /*if (player4.isBot)
+                {
+                    Invoke("BotGetInteractableButton", 6f);
+                    botBeheaviour.ClickRandomButton();
+                }*/
 
                 if (player4HaveCheckCard && player4HaveChooseCard && player4HaveGuessCard)
                     state = State.Initialization;
@@ -144,6 +182,7 @@ public class PlayManager : MonoBehaviour
                 GameIsOver();
                 break;
         }
+        Debug.Log(state);
     }
 
     void CalculatePlayerScores()
@@ -168,11 +207,14 @@ public class PlayManager : MonoBehaviour
         CalculatePlayerScores();
         OrderPlayerScores();
 
-        // Assign players to winner1, winner2, etc., based on their scores
+        // Sort players based on scores in descending order
+        allPlayers.Sort((player1, player2) => playerScores[player2].CompareTo(playerScores[player1]));
+
+        // Assign players to winner positions
         for (int i = 0; i < allPlayers.Count; i++)
         {
             Player player = allPlayers[i];
-            GameObject winnerGameObject = GetWinnerGameObject(i + 1); // i + 1 to get the corresponding winnerX GameObject
+            GameObject winnerGameObject = GetWinnerGameObject(i + 1);
             player.transform.SetParent(winnerGameObject.transform);
         }
     }
@@ -190,7 +232,13 @@ public class PlayManager : MonoBehaviour
             case 4:
                 return winner4;
             default:
-                return null; // Handle any other cases as needed
+                return null;
         }
     }
+
+    public void BotGetInteractableButton()
+    {
+        botBeheaviour.GetInteractableButton();
+    }
+
 }
