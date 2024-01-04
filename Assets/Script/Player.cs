@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        /*if(isBot)
+        /*if (isBot)
         {
             Invoke("BotGetInteractableButton", 6f);
             botBeheaviour.ClickRandomButton();
@@ -188,5 +188,14 @@ public class Player : MonoBehaviour
     public void BotPressedButton()
     {
         botBeheaviour.ClickRandomButton();
+    }
+
+    public bool CheckCardIsZero()
+    {
+        if (transform.childCount > 0)
+            return false;
+
+        else
+            return true;
     }
 }

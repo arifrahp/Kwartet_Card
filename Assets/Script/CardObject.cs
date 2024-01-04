@@ -2,6 +2,7 @@ using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,6 @@ public class CardObject : MonoBehaviour
     {
         //cardTouchButton = GetComponentInChildren<Button>();
         playManager = FindAnyObjectByType<PlayManager>();
-        player = GetComponentInParent<Player>();
         player1 = GameObject.Find("Player1");
         player2 = GameObject.Find("Player2");
         player3 = GameObject.Find("Player3");
@@ -39,9 +39,10 @@ public class CardObject : MonoBehaviour
         cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
     }
-
+    
     void Update()
     {
+        player = GetComponentInParent<Player>();
         if (player.isBot)
         {
             cardImage.color = Color.black;
@@ -60,7 +61,6 @@ public class CardObject : MonoBehaviour
     public IEnumerator DeactivateQuestionPanel()
     {
         yield return new WaitForSeconds(3f);
-        questionPanel.SetActive(false);
         transitionPanel.SetActive(false);
     }
 
@@ -71,6 +71,7 @@ public class CardObject : MonoBehaviour
         {
             case PlayManager.State.Player1Turn:
                 transitionText.text = "Salah";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player1HaveGuessCard = true;
@@ -78,6 +79,7 @@ public class CardObject : MonoBehaviour
 
             case PlayManager.State.Player2Turn:
                 transitionText.text = "Salah";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player2HaveGuessCard = true;
@@ -85,6 +87,7 @@ public class CardObject : MonoBehaviour
 
             case PlayManager.State.Player3Turn:
                 transitionText.text = "Salah";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player3HaveGuessCard = true;
@@ -92,6 +95,7 @@ public class CardObject : MonoBehaviour
 
             case PlayManager.State.Player4Turn:
                 transitionText.text = "Salah";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player4HaveGuessCard = true;
@@ -107,6 +111,7 @@ public class CardObject : MonoBehaviour
             case PlayManager.State.Player1Turn:
                 this.transform.SetParent(player1.transform);
                 transitionText.text = "Benar";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player1HaveGuessCard = true;
@@ -115,6 +120,7 @@ public class CardObject : MonoBehaviour
             case PlayManager.State.Player2Turn:
                 this.transform.SetParent(player2.transform);
                 transitionText.text = "Benar";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player2HaveGuessCard = true;
@@ -123,6 +129,7 @@ public class CardObject : MonoBehaviour
             case PlayManager.State.Player3Turn:
                 this.transform.SetParent(player3.transform);
                 transitionText.text = "Benar";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player3HaveGuessCard = true;
@@ -131,6 +138,7 @@ public class CardObject : MonoBehaviour
             case PlayManager.State.Player4Turn:
                 this.transform.SetParent(player4.transform);
                 transitionText.text = "Benar";
+                questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player4HaveGuessCard = true;
@@ -203,6 +211,11 @@ public class CardObject : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+                    /*if (player.isBot)
+                    {
+                        Invoke("BotGetInteractableButton", 6f);
+                        botBeheaviour.ClickRandomButton();
+                    }*/
                     playManager.player2HaveCheckCard = true;
                 }
                 else

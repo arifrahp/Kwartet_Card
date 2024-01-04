@@ -6,10 +6,14 @@ using UnityEngine.UI;
 public class BotBeheaviour : MonoBehaviour
 {
     public List<Button> interactableButtons = new List<Button>();
+    private PlayManager playManager;
+    private bool hasPerformedCheckCard = false;
+    private bool hasPerformedChooseCard = false;
+    private bool hasPerformedGuessCard = false;
 
     void Start()
     {
-        
+        playManager = FindObjectOfType<PlayManager>();
     }
 
     public void GetInteractableButton()
@@ -64,5 +68,48 @@ public class BotBeheaviour : MonoBehaviour
         {
             Debug.LogWarning("Button has no onClick event assigned.");
         }
+    }
+
+    public void PlayBotTurn(Player botPlayer)
+    {
+        StartCoroutine(BotTurnRoutine(botPlayer));
+    }
+
+    IEnumerator BotTurnRoutine(Player botPlayer)
+    {
+        // Wait for a short duration (you can adjust this duration)
+        yield return new WaitForSeconds(1f);
+
+        // Check card (Perform only once)
+        if (!hasPerformedCheckCard)
+        {
+            botPlayer.SetOtherCardButtonsInteractable();
+            hasPerformedCheckCard = true;
+        }
+        yield return new WaitForSeconds(2f);
+
+        // Choose card (Perform only once)
+        if (!hasPerformedChooseCard)
+        {
+            botPlayer.BotGetInteractableButton();
+            hasPerformedChooseCard = true;
+        }
+        yield return new WaitForSeconds(2f);
+
+        // Guess card (Perform only once)
+        if (!hasPerformedGuessCard)
+        {
+            botPlayer.BotPressedButton();
+            hasPerformedGuessCard = true;
+        }
+        yield return new WaitForSeconds(2f);
+
+        // Clear interactable state for the next turn
+        botPlayer.SetChildCardNotInteractable();
+
+        // Reset the flags for the next turn
+        hasPerformedCheckCard = false;
+        hasPerformedChooseCard = false;
+        hasPerformedGuessCard = false;
     }
 }

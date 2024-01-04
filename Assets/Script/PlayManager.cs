@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayManager : MonoBehaviour
 {
@@ -44,7 +42,11 @@ public class PlayManager : MonoBehaviour
     public Player player2;
     public Player player3;
     public Player player4;
+
+    public GameObject holderCanvas;
+
     private BotBeheaviour botBeheaviour;
+    private CardManager cardManager;
 
     public enum State
     {
@@ -58,9 +60,11 @@ public class PlayManager : MonoBehaviour
 
     void Start()
     {
+        holderCanvas.SetActive(false);
         state = State.Initialization;
 
         botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
+        cardManager = FindAnyObjectByType<CardManager>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject playerObject in playerObjects)
@@ -75,107 +79,31 @@ public class PlayManager : MonoBehaviour
 
     void Update()
     {
+        HandleGameState();
+    }
+
+    void HandleGameState()
+    {
         switch (state)
         {
             case State.Initialization:
-                bool isAddUp;
-                isAddUp = false;
-
-                if(roundCount != 20)
-                {
-                    if (!isAddUp)
-                    {
-                        player1HaveCheckCard = false;
-                        player1HaveChooseCard = false;
-                        player1HaveGuessCard = false;
-
-                        player2HaveCheckCard = false;
-                        player2HaveChooseCard = false;
-                        player2HaveGuessCard = false;
-
-                        player3HaveCheckCard = false;
-                        player3HaveChooseCard = false;
-                        player3HaveGuessCard = false;
-
-                        player4HaveCheckCard = false;
-                        player4HaveChooseCard = false;
-                        player4HaveGuessCard = false;
-
-                        Player[] players = FindObjectsOfType<Player>();
-                        foreach (Player player in players)
-                        {
-                            player.ShuffleCardPositions();
-                        }
-
-                        roundCount += 1;
-                        isAddUp = true;
-                    }
-                    if (isAddUp)
-                    {
-                        state = State.Player1Turn;
-                    }
-                }
-                if(roundCount == 20)
-                {
-                    state = State.GameOver;
-                }
-
+                HandleInitializationState();
                 break;
 
             case State.Player1Turn:
-                if (!player1HaveCheckCard)
-                    player1CheckCard.Invoke();
-
-                /*if (player1.isBot)
-                {
-                    Invoke("BotGetInteractableButton", 6f);
-                    botBeheaviour.ClickRandomButton();
-                }*/
-
-                if (player1HaveCheckCard && player1HaveChooseCard && player1HaveGuessCard)
-                    state = State.Player2Turn;
+                HandlePlayer1TurnState();
                 break;
 
             case State.Player2Turn:
-                if (!player2HaveCheckCard)
-                    player2CheckCard.Invoke();
-
-                /*if (player2.isBot)
-                {
-                    Invoke("BotGetInteractableButton", 6f);
-                    botBeheaviour.ClickRandomButton();
-                }*/
-
-                if (player2HaveCheckCard && player2HaveChooseCard && player2HaveGuessCard)
-                    state = State.Player3Turn;
+                HandlePlayer2TurnState();
                 break;
 
             case State.Player3Turn:
-                if (!player3HaveCheckCard)
-                    player3CheckCard.Invoke();
-
-                /*if (player3.isBot)
-                {
-                    Invoke("BotGetInteractableButton", 6f);
-                    botBeheaviour.ClickRandomButton();
-                }*/
-
-                if (player3HaveCheckCard && player3HaveChooseCard && player3HaveGuessCard)
-                    state = State.Player4Turn;
+                HandlePlayer3TurnState();
                 break;
 
             case State.Player4Turn:
-                if (!player4HaveCheckCard)
-                    player4CheckCard.Invoke();
-
-                /*if (player4.isBot)
-                {
-                    Invoke("BotGetInteractableButton", 6f);
-                    botBeheaviour.ClickRandomButton();
-                }*/
-
-                if (player4HaveCheckCard && player4HaveChooseCard && player4HaveGuessCard)
-                    state = State.Initialization;
+                HandlePlayer4TurnState();
                 break;
 
             case State.GameOver:
@@ -185,21 +113,237 @@ public class PlayManager : MonoBehaviour
         Debug.Log(state);
     }
 
-    void CalculatePlayerScores()
+    void HandleInitializationState()
     {
-        playerScores.Clear();
+        bool isAddUp = false;
 
-        foreach (Player player in allPlayers)
+        if (roundCount != 20)
         {
-            int score = player.CalculateScore();
-            playerScores.Add(player, score);
+            if (!isAddUp)
+            {
+                player1HaveCheckCard = false;
+                player1HaveChooseCard = false;
+                player1HaveGuessCard = false;
+
+                player2HaveCheckCard = false;
+                player2HaveChooseCard = false;
+                player2HaveGuessCard = false;
+
+                player3HaveCheckCard = false;
+                player3HaveChooseCard = false;
+                player3HaveGuessCard = false;
+
+                player4HaveCheckCard = false;
+                player4HaveChooseCard = false;
+                player4HaveGuessCard = false;
+
+                Player[] players = FindObjectsOfType<Player>();
+                foreach (Player player in players)
+                {
+                    player.ShuffleCardPositions();
+                }
+
+                roundCount += 1;
+                isAddUp = true;
+            }
+            if (isAddUp)
+            {
+                state = State.Player1Turn;
+            }
+        }
+        if (roundCount == 20)
+        {
+            state = State.GameOver;
         }
     }
 
-    void OrderPlayerScores()
+    void HandlePlayer1TurnState()
     {
-        List<Player> orderedPlayers = allPlayers.OrderBy(player => -playerScores[player]).ToList();
-        allPlayers = orderedPlayers;
+        if (player1.CheckCardIsZero())
+        {
+            state = State.Player2Turn;
+        }
+
+        else if (!player1.CheckCardIsZero())
+        {
+            if (!player1HaveCheckCard)
+                player1CheckCard.Invoke();
+
+            if (player1.isBot)
+            {
+                holderCanvas.SetActive(true);
+                if (!player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard)
+                {
+                    if (cardManager.CheckAllComponentsInactive())
+                    {
+                        Debug.Log("masuk1");
+                        Invoke("BotGetInteractableButton", 2f);
+                        botBeheaviour.ClickRandomButton();
+                    }
+                }
+                if (player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard)
+                {
+                    Debug.Log("masuk2");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+                if (player1HaveCheckCard && player1HaveChooseCard && !player1HaveGuessCard)
+                {
+                    Debug.Log("masuk3");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+            }
+            else if (!player1.isBot)
+            {
+                holderCanvas.SetActive(false);
+            }
+
+            if (player1HaveCheckCard && player1HaveChooseCard && player1HaveGuessCard)
+                state = State.Player2Turn;
+        }
+    }
+
+    void HandlePlayer2TurnState()
+    {
+        if (player2.CheckCardIsZero())
+        {
+            state = State.Player3Turn;
+        }
+
+        else if (!player2.CheckCardIsZero())
+        {
+            if (!player2HaveCheckCard)
+                player2CheckCard.Invoke();
+
+            if (player2.isBot)
+            {
+                holderCanvas.SetActive(true);
+                if (!player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard)
+                {
+                    if(cardManager.CheckAllComponentsInactive())
+                    {
+                        Debug.Log("masuk1");
+                        Invoke("BotGetInteractableButton", 2f);
+                        botBeheaviour.ClickRandomButton();
+                    }
+                }
+                if (player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard)
+                {
+                    Debug.Log("masuk2");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+                if (player2HaveCheckCard && player2HaveChooseCard && !player2HaveGuessCard)
+                {
+                    Debug.Log("masuk3");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+            }
+            else if (!player2.isBot)
+            {
+                holderCanvas.SetActive(false);
+            }
+            StartCoroutine(WaitBotPerformAction(10f));
+
+            if (player2HaveCheckCard && player2HaveChooseCard && player2HaveGuessCard)
+                state = State.Player3Turn;
+        }
+    }
+
+    void HandlePlayer3TurnState()
+    {
+        if (player3.CheckCardIsZero())
+        {
+            state = State.Player4Turn;
+        }
+
+        else if (!player3.CheckCardIsZero())
+        {
+            if (!player3HaveCheckCard)
+                player3CheckCard.Invoke();
+
+            if (player3.isBot)
+            {
+                if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard)
+                {
+                    holderCanvas.SetActive(true);
+                    if (cardManager.CheckAllComponentsInactive())
+                    {
+                        Debug.Log("masuk1");
+                        Invoke("BotGetInteractableButton", 2f);
+                        botBeheaviour.ClickRandomButton();
+                    }
+                }
+                if (player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard)
+                {
+                    Debug.Log("masuk2");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+                if (player3HaveCheckCard && player3HaveChooseCard && !player3HaveGuessCard)
+                {
+                    Debug.Log("masuk3");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+            }
+            else if (!player3.isBot)
+            {
+                holderCanvas.SetActive(false);
+            }
+
+            if (player3HaveCheckCard && player3HaveChooseCard && player3HaveGuessCard)
+                state = State.Player4Turn;
+        }
+    }
+
+    void HandlePlayer4TurnState()
+    {
+        if (player4.CheckCardIsZero())
+        {
+            state = State.Initialization;
+        }
+
+        else if (!player4.CheckCardIsZero())
+        {
+            if (!player4HaveCheckCard)
+                player4CheckCard.Invoke();
+
+            if (player4.isBot)
+            {
+                holderCanvas.SetActive(true);
+                if (!player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard)
+                {
+                    if (cardManager.CheckAllComponentsInactive())
+                    {
+                        Debug.Log("masuk1");
+                        Invoke("BotGetInteractableButton", 2f);
+                        botBeheaviour.ClickRandomButton();
+                    }
+                }
+                if (player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard)
+                {
+                    Debug.Log("masuk2");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+                if (player4HaveCheckCard && player4HaveChooseCard && !player4HaveGuessCard)
+                {
+                    Debug.Log("masuk3");
+                    Invoke("BotGetInteractableButton", 2f);
+                    botBeheaviour.ClickRandomButton();
+                }
+            }
+            else if (!player3.isBot)
+            {
+                holderCanvas.SetActive(false);
+            }
+
+            if (player4HaveCheckCard && player4HaveChooseCard && player4HaveGuessCard)
+                state = State.Initialization;
+        }
     }
 
     void GameIsOver()
@@ -241,4 +385,26 @@ public class PlayManager : MonoBehaviour
         botBeheaviour.GetInteractableButton();
     }
 
+    private IEnumerator WaitBotPerformAction(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        botBeheaviour.GetInteractableButton();
+    }
+
+    void CalculatePlayerScores()
+    {
+        playerScores.Clear();
+
+        foreach (Player player in allPlayers)
+        {
+            int score = player.CalculateScore();
+            playerScores.Add(player, score);
+        }
+    }
+
+    void OrderPlayerScores()
+    {
+        List<Player> orderedPlayers = allPlayers.OrderBy(player => -playerScores[player]).ToList();
+        allPlayers = orderedPlayers;
+    }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -11,11 +13,34 @@ public class CardManager : MonoBehaviour
 
     private int currentGroupID = 1;
 
+    public List<GameObject> cardPanels = new List<GameObject>();
+
     void Start()
     {
         CardGroupID();
         AssignCardIDs();
         InstantiateCardsRandomly();
+
+        // Get all GameObjects with the "Player" tag
+        GameObject[] allPanelObjects = Resources.FindObjectsOfTypeAll<GameObject>()
+        .Where(obj => obj.CompareTag("panel") && !UnityEditor.EditorUtility.IsPersistent(obj))
+        .ToArray();
+
+        // Clear the list before populating it again
+        cardPanels.Clear();
+
+        foreach (GameObject panelObject in allPanelObjects)
+        {
+            // Add the GameObject directly to the list
+            cardPanels.Add(panelObject);
+        }
+
+        // Check if all components are inactive
+        if (CheckAllComponentsInactive())
+        {
+            // Proceed with your action...
+            Debug.Log("All components are inactive. Proceeding with the action...");
+        }
     }
 
     public void CardGroupID()
@@ -85,5 +110,21 @@ public class CardManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+
+    public bool CheckAllComponentsInactive()
+    {
+        // Check if all components are inactive
+        foreach (GameObject panelObject in cardPanels)
+        {
+            if (panelObject.gameObject.activeSelf)
+            {
+                // If at least one component is active, return false
+                return false;
+            }
+        }
+        // If no active components found, return true
+        return true;
     }
 }
