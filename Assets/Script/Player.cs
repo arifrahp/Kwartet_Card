@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -113,7 +114,8 @@ public class Player : MonoBehaviour
 
         foreach (int cardCount in cardCounts.Values)
         {
-            playerScore += cardCount / 4;
+            playerScore += cardCount / 4 * 100; // Score 100 for every 4 cards of the same ID
+            playerScore += cardCount; // Score 1 for each card
         }
 
         // Store the calculated score in the 'score' variable
@@ -121,6 +123,7 @@ public class Player : MonoBehaviour
 
         return playerScore;
     }
+
 
     void Update()
     {
@@ -135,16 +138,29 @@ public class Player : MonoBehaviour
         Player[] players = FindObjectsOfType<Player>();
         foreach (Player player in players)
         {
+            // Skip the current player
+            if (player == this)
+                continue;
+
             // Iterate through all cards of each player
             foreach (Transform card in player.transform)
             {
                 Button cardButton = card.GetComponentInChildren<Button>();
+                CardObject cardObject = card.GetComponent<CardObject>();
 
                 // Check if this card has a button component and it's not the current player's card
                 if (cardButton != null && player != this)
                 {
-                    // Set the interactable property of the button to false for cards of other players
-                    cardButton.interactable = false;
+                    // If the current player has 4 cards of the same ID, set buttons of those cards to be non-interactable
+                    if (cards.Count(cardID => cardID == cardObject.idCard) >= 4)
+                    {
+                        cardButton.interactable = false;
+                    }
+                    else
+                    {
+                        // Set the interactable property of the button to false for cards of other players
+                        cardButton.interactable = false;
+                    }
                 }
             }
         }
@@ -153,19 +169,23 @@ public class Player : MonoBehaviour
         foreach (Transform card in transform)
         {
             Button cardButton = card.GetComponentInChildren<Button>();
+            CardObject cardObject = card.GetComponent<CardObject>();
 
             if (cardButton != null)
             {
-                cardButton.interactable = true;
+                // If the current player has 4 cards of the same ID, set buttons of those cards to be non-interactable
+                if (cards.Count(cardID => cardID == cardObject.idCard) >= 4)
+                {
+                    cardButton.interactable = false;
+                }
+                else
+                {
+                    cardButton.interactable = true;
+                }
             }
         }
-
-        /*if (isBot)
-        {
-            Invoke("BotGetInteractableButton", 6f);
-            botBeheaviour.ClickRandomButton();
-        }*/
     }
+
 
     public void SetChildCardNotInteractable()
     {
@@ -180,16 +200,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void BotGetInteractableButton()
-    {
-        botBeheaviour.GetInteractableButton();
-    }
-
-    public void BotPressedButton()
-    {
-        botBeheaviour.ClickRandomButton();
-    }
-
     public bool CheckCardIsZero()
     {
         if (transform.childCount > 0)
@@ -197,5 +207,20 @@ public class Player : MonoBehaviour
 
         else
             return true;
+    }
+
+    public bool CheckNoInteractableCards()
+    {
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+
+            if (cardButton != null && cardButton.interactable)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

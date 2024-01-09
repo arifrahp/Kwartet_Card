@@ -24,7 +24,7 @@ public class BotBeheaviour : MonoBehaviour
         // Filter and add only the interactable buttons to the list
         foreach (Button button in allButtons)
         {
-            if (button.interactable)
+            if (button.interactable && !button.CompareTag("menuButton"))
             {
                 interactableButtons.Add(button);
             }
@@ -70,7 +70,7 @@ public class BotBeheaviour : MonoBehaviour
         }
     }
 
-    public void PlayBotTurn(Player botPlayer)
+    /*public void PlayBotTurn(Player botPlayer)
     {
         StartCoroutine(BotTurnRoutine(botPlayer));
     }
@@ -111,5 +111,5 @@ public class BotBeheaviour : MonoBehaviour
         hasPerformedCheckCard = false;
         hasPerformedChooseCard = false;
         hasPerformedGuessCard = false;
-    }
+    }*/
 }
