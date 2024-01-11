@@ -23,4 +23,12 @@ public class CardHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (cardObject.cardTouchButton.interactable)
             cardObject.OnCardHoverExit();
     }
+
+    public bool PointerOnHover()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject())
+            return false;
+        else
+            return true;
+    }
 }

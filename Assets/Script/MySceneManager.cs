@@ -20,11 +20,13 @@ public class MySceneManager : MonoBehaviour
     public void ToGameScene()
     {
         SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1f;
     }
 
     public void ToStartScene()
     {
         SceneManager.LoadScene("StartScene");
+        Time.timeScale = 1f;
     }
 
     public void OnQuiit()

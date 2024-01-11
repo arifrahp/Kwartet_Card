@@ -26,19 +26,23 @@ public class CardObject : MonoBehaviour
     private PlayManager playManager;
     private Player player;
     public BotBeheaviour botBeheaviour;
+    public CardHover cardHover;
 
     public Vector3 originalPosition;
     public Quaternion originalRotation;
+
+    private bool isHovering;
     private void Start()
     {
         //cardTouchButton = GetComponentInChildren<Button>();
         playManager = FindAnyObjectByType<PlayManager>();
-        player1 = GameObject.Find("Player1");
-        player2 = GameObject.Find("Player2");
-        player3 = GameObject.Find("Player3");
-        player4 = GameObject.Find("Player4");
+        player1 = GameObject.Find("Player");
+        player2 = GameObject.Find("Bot 1");
+        player3 = GameObject.Find("Bot 2");
+        player4 = GameObject.Find("Bot 3");
         questionPanel.SetActive(false);
 
+        cardHover = GetComponentInChildren<CardHover>();
         cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
     }
@@ -61,6 +65,12 @@ public class CardObject : MonoBehaviour
         {
             cardImage.color = Color.white;
         }
+
+        if (!cardHover.PointerOnHover() && !LeanTween.isTweening())
+        {
+            transform.localPosition = originalPosition;
+            transform.localRotation = originalRotation;
+        }
     }
 
     public void OnPressedTest()
@@ -80,33 +90,33 @@ public class CardObject : MonoBehaviour
         switch (currentState)
         {
             case PlayManager.State.Player1Turn:
-                transitionText.text = "Salah";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player1HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player2Turn:
-                transitionText.text = "Salah";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player2HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player3Turn:
-                transitionText.text = "Salah";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player3HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player4Turn:
-                transitionText.text = "Salah";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player4HaveGuessCard = true;
                 break;
@@ -120,36 +130,36 @@ public class CardObject : MonoBehaviour
         {
             case PlayManager.State.Player1Turn:
                 this.transform.SetParent(player1.transform);
-                transitionText.text = "Benar";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player1HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player2Turn:
                 this.transform.SetParent(player2.transform);
-                transitionText.text = "Benar";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player2HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player3Turn:
                 this.transform.SetParent(player3.transform);
-                transitionText.text = "Benar";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player3HaveGuessCard = true;
                 break;
 
             case PlayManager.State.Player4Turn:
                 this.transform.SetParent(player4.transform);
-                transitionText.text = "Benar";
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
+                transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player4HaveGuessCard = true;
                 break;
@@ -301,24 +311,22 @@ public class CardObject : MonoBehaviour
 
     public void OnCardHoverEnter()
     {
+        isHovering = true;
         LeanTween.cancel(this.gameObject);
 
         // Move the object to a new position and rotation in world space
         LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 0.5f, -1), 0.3f);
         LeanTween.rotateLocal(this.gameObject, Vector3.zero, 0.3f);
-
-        Debug.Log(this.gameObject.transform.position);
     }
 
     public void OnCardHoverExit()
     {
+        isHovering = false;
         LeanTween.cancel(this.gameObject);
 
         // Move the object back to its original position and rotation in world space
         LeanTween.moveLocal(this.gameObject, originalPosition, 0.1f);
         LeanTween.rotateLocal(this.gameObject, originalRotation.eulerAngles, 0.1f);
-
-        Debug.Log(this.gameObject.transform.position);
     }
 
 }
