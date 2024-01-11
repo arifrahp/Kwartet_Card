@@ -26,6 +26,9 @@ public class CardObject : MonoBehaviour
     private PlayManager playManager;
     private Player player;
     public BotBeheaviour botBeheaviour;
+
+    public Vector3 originalPosition;
+    public Quaternion originalRotation;
     private void Start()
     {
         //cardTouchButton = GetComponentInChildren<Button>();
@@ -39,7 +42,14 @@ public class CardObject : MonoBehaviour
         cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
     }
-    
+
+
+    public void GetRotationAndPosition()
+    {
+        originalPosition = this.transform.localPosition;
+        originalRotation = this.transform.localRotation;
+    }
+
     void Update()
     {
         player = GetComponentInParent<Player>();
@@ -289,8 +299,26 @@ public class CardObject : MonoBehaviour
         }
     }
 
-    public void BotGetInteractableButton()
+    public void OnCardHoverEnter()
     {
-        botBeheaviour.GetInteractableButton();
+        LeanTween.cancel(this.gameObject);
+
+        // Move the object to a new position and rotation in world space
+        LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 0.5f, -1), 0.3f);
+        LeanTween.rotateLocal(this.gameObject, Vector3.zero, 0.3f);
+
+        Debug.Log(this.gameObject.transform.position);
     }
+
+    public void OnCardHoverExit()
+    {
+        LeanTween.cancel(this.gameObject);
+
+        // Move the object back to its original position and rotation in world space
+        LeanTween.moveLocal(this.gameObject, originalPosition, 0.1f);
+        LeanTween.rotateLocal(this.gameObject, originalRotation.eulerAngles, 0.1f);
+
+        Debug.Log(this.gameObject.transform.position);
+    }
+
 }

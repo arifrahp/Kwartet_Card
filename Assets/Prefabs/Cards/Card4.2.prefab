@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 2557980275194486468}
   - component: {fileID: 5713982151920254995}
   - component: {fileID: 2247179784209199428}
+  - component: {fileID: 8393343444392483389}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -487,6 +488,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8393343444392483389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165115352555066104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b265ed049060948aad1d81bb816aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardObject: {fileID: 0}
 --- !u!1 &2631334935248525252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,10 +1713,12 @@ MonoBehaviour:
   questionPanel: {fileID: 7498703281060057127}
   transitionPanel: {fileID: 8422837194421261263}
   transitionText: {fileID: 573537697148156979}
-  idCard: 1
+  idCard: 4
   cardNumber: 2
   cardTouchButton: {fileID: 2247179784209199428}
   botBeheaviour: {fileID: 0}
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8422837194421261263
 GameObject:
   m_ObjectHideFlags: 0

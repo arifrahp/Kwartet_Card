@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayManager : MonoBehaviour
 {
@@ -44,6 +45,12 @@ public class PlayManager : MonoBehaviour
     public Player player4;
 
     public GameObject holderCanvas;
+    public GameObject gameOverCanvas;
+
+    public TMP_Text winner1Text;
+    public TMP_Text winner2Text;
+    public TMP_Text winner3Text;
+    public TMP_Text winner4Text;
 
     private BotBeheaviour botBeheaviour;
     private CardManager cardManager;
@@ -60,6 +67,7 @@ public class PlayManager : MonoBehaviour
 
     void Start()
     {
+        gameOverCanvas.SetActive(false);
         holderCanvas.SetActive(false);
         state = State.Initialization;
 
@@ -169,6 +177,10 @@ public class PlayManager : MonoBehaviour
             if (!player1HaveCheckCard)
                 player1CheckCard.Invoke();
 
+            if (!player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard && player1.CheckNoInteractableCards())
+                state = State.Player2Turn;
+            
+
             if (player1.isBot)
             {
                 holderCanvas.SetActive(true);
@@ -209,12 +221,16 @@ public class PlayManager : MonoBehaviour
         if (player2.CheckCardIsZero())
         {
             state = State.Player3Turn;
+        
         }
 
         else if (!player2.CheckCardIsZero())
         {
             if (!player2HaveCheckCard)
                 player2CheckCard.Invoke();
+
+            if (!player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard && player2.CheckNoInteractableCards())
+                state = State.Player3Turn;
 
             if (player2.isBot)
             {
@@ -264,6 +280,9 @@ public class PlayManager : MonoBehaviour
             if (!player3HaveCheckCard)
                 player3CheckCard.Invoke();
 
+            if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard && player3.CheckNoInteractableCards())
+                state = State.Player4Turn;
+
             if (player3.isBot)
             {
                 if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard)
@@ -311,6 +330,9 @@ public class PlayManager : MonoBehaviour
             if (!player4HaveCheckCard)
                 player4CheckCard.Invoke();
 
+            if (!player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard && player4.CheckNoInteractableCards())
+                state = State.Initialization;
+
             if (player4.isBot)
             {
                 holderCanvas.SetActive(true);
@@ -351,16 +373,17 @@ public class PlayManager : MonoBehaviour
         CalculatePlayerScores();
         OrderPlayerScores();
 
-        // Sort players based on scores in descending order
         allPlayers.Sort((player1, player2) => playerScores[player2].CompareTo(playerScores[player1]));
 
-        // Assign players to winner positions
         for (int i = 0; i < allPlayers.Count; i++)
         {
             Player player = allPlayers[i];
             GameObject winnerGameObject = GetWinnerGameObject(i + 1);
             player.transform.SetParent(winnerGameObject.transform);
         }
+
+        PositionNaming();
+        gameOverCanvas.SetActive(true);
     }
 
     GameObject GetWinnerGameObject(int position)
@@ -406,5 +429,13 @@ public class PlayManager : MonoBehaviour
     {
         List<Player> orderedPlayers = allPlayers.OrderBy(player => -playerScores[player]).ToList();
         allPlayers = orderedPlayers;
+    }
+
+    void PositionNaming()
+    {
+        winner1Text.text = allPlayers[0].transform.name;
+        winner2Text.text = allPlayers[1].transform.name;
+        winner3Text.text = allPlayers[2].transform.name;
+        winner4Text.text = allPlayers[3].transform.name;
     }
 }

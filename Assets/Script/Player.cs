@@ -39,15 +39,16 @@ public class Player : MonoBehaviour
                     cards.Add(cardID);
 
                     Vector3 localPosition = Vector3.zero;
-                    localPosition.x = i * 1f;
-
+                    localPosition.x = i * 0.5f;
                     localPosition.y = 0f;
                     localPosition.z = 0f;
 
-                    Quaternion localRotation = Quaternion.identity;
+                    Quaternion localRotation = Quaternion.Euler(0f, 35f, 0f);
 
                     child.localPosition = localPosition;
                     child.localRotation = localRotation;
+
+                    cardObject.GetRotationAndPosition();
                 }
 
                 previousChildCount = currentChildCount;
@@ -82,11 +83,11 @@ public class Player : MonoBehaviour
         {
             Transform cardTransform = cardsTransforms[i];
             Vector3 localPosition = Vector3.zero;
-            localPosition.x = i * 1f;
+            localPosition.x = i * 0.5f;
             localPosition.y = 0f;
             localPosition.z = 0f;
 
-            Quaternion localRotation = Quaternion.identity;
+            Quaternion localRotation = Quaternion.Euler(0f, 35f, 0f);
 
             cardTransform.localPosition = localPosition;
             cardTransform.localRotation = localRotation;

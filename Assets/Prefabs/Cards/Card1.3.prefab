@@ -59,6 +59,8 @@ MonoBehaviour:
   cardNumber: 2
   cardTouchButton: {fileID: 1307861338595215176}
   botBeheaviour: {fileID: 0}
+  originalPosition: {x: 0, y: 0, z: 0}
+  originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &311035531977424848
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +443,7 @@ GameObject:
   - component: {fileID: 894664900045669589}
   - component: {fileID: 2709019832639319083}
   - component: {fileID: 1307861338595215176}
+  - component: {fileID: 3748226834071862433}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -573,6 +576,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3748226834071862433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959605881575664776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b265ed049060948aad1d81bb816aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardObject: {fileID: 0}
 --- !u!1 &1144305616738210999
 GameObject:
   m_ObjectHideFlags: 0

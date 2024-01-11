@@ -55,7 +55,7 @@ MonoBehaviour:
   questionPanel: {fileID: 3394708542406465105}
   transitionPanel: {fileID: 5509202815146826163}
   transitionText: {fileID: 5234588333205773397}
-  idCard: 1
+  idCard: 2
   cardNumber: 2
   cardTouchButton: {fileID: 1307861338595215176}
   botBeheaviour: {fileID: 0}
