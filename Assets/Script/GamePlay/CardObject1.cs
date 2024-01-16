@@ -138,6 +138,7 @@ public class CardObject1 : MonoBehaviour
                 playManager.player4HaveGuessCard = true;
                 break;
         }
+        restOfCard.CardGoesToPlayer();
     }
 
     public void CorrectAnswer()
@@ -198,13 +199,22 @@ public class CardObject1 : MonoBehaviour
                     {
                         card.cardTouchButton.interactable = false;
                     }
-                    questionPanel.SetActive(true);
+                    if(idCard == player.cardIDHolder)
+                    {
+                        CorrectAnswer();
+                    }
+                    else if(idCard != player.cardIDHolder)
+                    {
+                        WrongAnser();
+                    }
+
                     playManager.player1HaveChooseCard = true;
                 }
                 
                 if (!playManager.player1HaveCheckCard)
                 {
-                    foreach (CardObject1 card in allCards)
+                    player.cardIDHolder = idCard;
+                    /*foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -214,7 +224,10 @@ public class CardObject1 : MonoBehaviour
                         {
                             card.cardTouchButton.interactable = false;
                         }
-                    }
+                    }*/
+                    playManager.player2.SetCardButtonInteractable(idCard);
+                    playManager.player3.SetCardButtonInteractable(idCard);
+                    playManager.player4.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
                     playManager.player1HaveCheckCard = true;
                 }
@@ -230,14 +243,24 @@ public class CardObject1 : MonoBehaviour
                     {
                         card.cardTouchButton.interactable = false;
                     }
-                    questionPanel.SetActive(true);
+
+                    if (idCard == player.cardIDHolder)
+                    {
+                        CorrectAnswer();
+                    }
+                    else if (idCard != player.cardIDHolder)
+                    {
+                        WrongAnser();
+                    }
+
                     playManager.player2HaveChooseCard = true;
                 }
 
                 if (!playManager.player2HaveCheckCard)
                 {
+                    player.cardIDHolder = idCard;
                     foreach (CardObject1 card in allCards)
-                    {
+                    /*{
                         if (card.idCard == idCard)
                         {
                             card.cardTouchButton.interactable = true;
@@ -246,13 +269,11 @@ public class CardObject1 : MonoBehaviour
                         {
                             card.cardTouchButton.interactable = false;
                         }
-                    }
-                    player.SetChildCardNotInteractable();
-                    /*if (player.isBot)
-                    {
-                        Invoke("BotGetInteractableButton", 6f);
-                        botBeheaviour.ClickRandomButton();
                     }*/
+                    playManager.player1.SetCardButtonInteractable(idCard);
+                    playManager.player3.SetCardButtonInteractable(idCard);
+                    playManager.player4.SetCardButtonInteractable(idCard);
+                    player.SetChildCardNotInteractable();
                     playManager.player2HaveCheckCard = true;
                 }
                 else
@@ -267,13 +288,23 @@ public class CardObject1 : MonoBehaviour
                     {
                         card.cardTouchButton.interactable = false;
                     }
-                    questionPanel.SetActive(true);
+
+                    if (idCard == player.cardIDHolder)
+                    {
+                        CorrectAnswer();
+                    }
+                    else if (idCard != player.cardIDHolder)
+                    {
+                        WrongAnser();
+                    }
+
                     playManager.player3HaveChooseCard = true;
                 }
 
                 if (!playManager.player3HaveCheckCard)
                 {
-                    foreach (CardObject1 card in allCards)
+                    player.cardIDHolder = idCard;
+                    /*foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -283,7 +314,10 @@ public class CardObject1 : MonoBehaviour
                         {
                             card.cardTouchButton.interactable = false;
                         }
-                    }
+                    }*/
+                    playManager.player1.SetCardButtonInteractable(idCard);
+                    playManager.player2.SetCardButtonInteractable(idCard);
+                    playManager.player4.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
                     playManager.player3HaveCheckCard = true;
                 }
@@ -299,13 +333,23 @@ public class CardObject1 : MonoBehaviour
                     {
                         card.cardTouchButton.interactable = false;
                     }
-                    questionPanel.SetActive(true);
+
+                    if (idCard == player.cardIDHolder)
+                    {
+                        CorrectAnswer();
+                    }
+                    else if (idCard != player.cardIDHolder)
+                    {
+                        WrongAnser();
+                    }
+
                     playManager.player4HaveChooseCard = true;
                 }
 
                 if (!playManager.player4HaveCheckCard)
                 {
-                    foreach (CardObject1 card in allCards)
+                    player.cardIDHolder = idCard;
+                    /*foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -315,7 +359,10 @@ public class CardObject1 : MonoBehaviour
                         {
                             card.cardTouchButton.interactable = false;
                         }
-                    }
+                    }*/
+                    playManager.player1.SetCardButtonInteractable(idCard);
+                    playManager.player2.SetCardButtonInteractable(idCard);
+                    playManager.player3.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
                     playManager.player4HaveCheckCard = true;
                 }

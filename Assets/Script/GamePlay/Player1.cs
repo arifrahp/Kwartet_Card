@@ -14,6 +14,7 @@ public class Player1 : MonoBehaviour
 
     public bool isBot;
     public BotBeheaviour1 botBeheaviour;
+    public int cardIDHolder;
 
     void Start()
     {
@@ -200,6 +201,34 @@ public class Player1 : MonoBehaviour
             }
         }
     }
+
+    public void SetCardButtonInteractable(int tempIDHolder)
+    {
+        bool anyCardMatchesID = false;
+
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
+
+            if (cardObject != null)
+            {
+                if (cardObject.idCard == tempIDHolder)
+                {
+                    anyCardMatchesID = true;
+                    break;  // No need to continue checking once a match is found
+                }
+            }
+        }
+
+        // Set interactable property based on whether any child card has the same ID
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+            cardButton.interactable = anyCardMatchesID;
+        }
+    }
+
 
     public bool CheckCardIsZero()
     {
