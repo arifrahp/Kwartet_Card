@@ -904,6 +904,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardObject: {fileID: 0}
+  thisButton: {fileID: 0}
+  cardButtonCanvas: {fileID: 0}
 --- !u!1 &3520669202278828680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,13 +2117,13 @@ MonoBehaviour:
   player2: {fileID: 0}
   player3: {fileID: 0}
   player4: {fileID: 0}
+  restOfCards: {fileID: 0}
   questionPanel: {fileID: 3520669202278828680}
   transitionPanel: {fileID: 4968956474347285834}
   transitionText: {fileID: 3713791527503881879}
   idCard: 1
-  cardNumber: 2
+  cardNumber: 4
   cardTouchButton: {fileID: 7739059236359197183}
-  botBeheaviour: {fileID: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7589048727757820237

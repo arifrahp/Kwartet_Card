@@ -14,6 +14,7 @@ public class CardObject1 : MonoBehaviour
     public GameObject player2;
     public GameObject player3;
     public GameObject player4;
+    public GameObject restOfCards;
 
     public GameObject questionPanel;
     public GameObject transitionPanel;
@@ -25,8 +26,9 @@ public class CardObject1 : MonoBehaviour
 
     private PlayManager1 playManager;
     private Player1 player;
-    public BotBeheaviour1 botBeheaviour;
-    public CardHover1 cardHover;
+    private BotBeheaviour1 botBeheaviour;
+    private CardHover1 cardHover;
+    private RestOfCard1 restOfCard;
 
     public Vector3 originalPosition;
     public Quaternion originalRotation;
@@ -40,11 +42,13 @@ public class CardObject1 : MonoBehaviour
         player2 = GameObject.Find("Bot 1");
         player3 = GameObject.Find("Bot 2");
         player4 = GameObject.Find("Bot 3");
+        restOfCards = GameObject.Find("RestOfCard");
         questionPanel.SetActive(false);
 
         cardHover = GetComponentInChildren<CardHover1>();
         cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
+        restOfCard = FindAnyObjectByType<RestOfCard1>();
     }
 
 
@@ -57,16 +61,24 @@ public class CardObject1 : MonoBehaviour
     void Update()
     {
         player = GetComponentInParent<Player1>();
-        if (player.isBot)
+        if(this.gameObject.transform.parent != restOfCards.transform)
+        {
+            if (player.isBot)
+            {
+                cardImage.color = Color.black;
+            }
+            if (!player.isBot)
+            {
+                cardImage.color = Color.white;
+            }
+        }
+        if (this.gameObject.transform.parent == restOfCards.transform)
         {
             cardImage.color = Color.black;
-        }
-        if (!player.isBot)
-        {
-            cardImage.color = Color.white;
+            cardTouchButton.interactable = false;
         }
 
-        if(cardTouchButton.interactable)
+        if (cardTouchButton.interactable)
         {
 
         }

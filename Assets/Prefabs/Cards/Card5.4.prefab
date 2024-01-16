@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 7710279647609942791}
   - component: {fileID: 483334086729754827}
   - component: {fileID: 7739059236359197183}
-  - component: {fileID: 2151301486459675108}
+  - component: {fileID: 1024893384981690815}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 27de8da287d0cd84e9817f5cf65563de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90fcbaf2de7012a49b5b25b9a1fbe24e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -891,7 +891,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2151301486459675108
+--- !u!114 &1024893384981690815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 6255730066644899979}
   - component: {fileID: 2428770827392171999}
   m_Layer: 0
-  m_Name: Card2.4
+  m_Name: Card5.4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   questionPanel: {fileID: 3520669202278828680}
   transitionPanel: {fileID: 4968956474347285834}
   transitionText: {fileID: 3713791527503881879}
-  idCard: 2
+  idCard: 5
   cardNumber: 4
   cardTouchButton: {fileID: 7739059236359197183}
   originalPosition: {x: 0, y: 0, z: 0}
