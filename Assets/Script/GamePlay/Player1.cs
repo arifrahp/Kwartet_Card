@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     public List<int> cards = new List<int>();
 
@@ -13,12 +13,12 @@ public class Player : MonoBehaviour
     public int score = 0;
 
     public bool isBot;
-    public BotBeheaviour botBeheaviour;
+    public BotBeheaviour1 botBeheaviour;
 
     void Start()
     {
         PopulateCardIDs();
-        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
     }
 
     public void PopulateCardIDs()
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
             for (int i = 0; i < currentChildCount; i++)
             {
                 Transform child = transform.GetChild(i);
-                CardObject cardObject = child.GetComponent<CardObject>();
+                CardObject1 cardObject = child.GetComponent<CardObject1>();
                 if (cardObject != null)
                 {
                     int cardID = cardObject.idCard;
@@ -136,8 +136,8 @@ public class Player : MonoBehaviour
     public void SetOtherCardButtonsInteractable()
     {
         // Iterate through all players
-        Player[] players = FindObjectsOfType<Player>();
-        foreach (Player player in players)
+        Player1[] players = FindObjectsOfType<Player1>();
+        foreach (Player1 player in players)
         {
             // Skip the current player
             if (player == this)
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
             foreach (Transform card in player.transform)
             {
                 Button cardButton = card.GetComponentInChildren<Button>();
-                CardObject cardObject = card.GetComponent<CardObject>();
+                CardObject1 cardObject = card.GetComponent<CardObject1>();
 
                 // Check if this card has a button component and it's not the current player's card
                 if (cardButton != null && player != this)
@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
         foreach (Transform card in transform)
         {
             Button cardButton = card.GetComponentInChildren<Button>();
-            CardObject cardObject = card.GetComponent<CardObject>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
 
             if (cardButton != null)
             {

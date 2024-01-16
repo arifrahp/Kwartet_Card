@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BotBeheaviour : MonoBehaviour
+public class BotBeheaviour1 : MonoBehaviour
 {
     public List<Button> interactableButtons = new List<Button>();
-    private PlayManager playManager;
+    private PlayManager1 playManager;
     private bool hasPerformedCheckCard = false;
     private bool hasPerformedChooseCard = false;
     private bool hasPerformedGuessCard = false;
 
     void Start()
     {
-        playManager = FindObjectOfType<PlayManager>();
+        playManager = FindObjectOfType<PlayManager1>();
     }
 
     public void GetInteractableButton()

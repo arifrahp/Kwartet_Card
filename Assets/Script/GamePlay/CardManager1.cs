@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CardManager : MonoBehaviour
+public class CardManager1 : MonoBehaviour
 {
     //tes
     //tis
@@ -55,7 +55,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < allCards.Count; i++)
         {
             GameObject card = allCards[i];
-            CardObject cardObject = card.GetComponent<CardObject>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
 
             if (cardObject != null)
             {
@@ -90,7 +90,7 @@ public class CardManager : MonoBehaviour
             GameObject cardPrefab = shuffledCards[i];
             GameObject card = Instantiate(cardPrefab);
 
-            CardObject cardObject = card.GetComponent<CardObject>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
 
             if (cardObject != null)
             {

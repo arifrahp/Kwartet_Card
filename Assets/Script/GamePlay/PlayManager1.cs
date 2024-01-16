@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class PlayManager : MonoBehaviour
+public class PlayManager1 : MonoBehaviour
 {
     [SerializeField] public State state;
     public UnityEvent player1CheckCard;
@@ -36,13 +36,13 @@ public class PlayManager : MonoBehaviour
     public GameObject winner3;
     public GameObject winner4;
 
-    public Dictionary<Player, int> playerScores = new Dictionary<Player, int>();
-    public List<Player> allPlayers = new List<Player>();
+    public Dictionary<Player1, int> playerScores = new Dictionary<Player1, int>();
+    public List<Player1> allPlayers = new List<Player1>();
 
-    public Player player1;
-    public Player player2;
-    public Player player3;
-    public Player player4;
+    public Player1 player1;
+    public Player1 player2;
+    public Player1 player3;
+    public Player1 player4;
 
     public GameObject holderCanvas;
     public GameObject gameOverCanvas;
@@ -52,8 +52,8 @@ public class PlayManager : MonoBehaviour
     public TMP_Text winner3Text;
     public TMP_Text winner4Text;
 
-    private BotBeheaviour botBeheaviour;
-    private CardManager cardManager;
+    private BotBeheaviour1 botBeheaviour;
+    private CardManager1 cardManager;
 
     public enum State
     {
@@ -71,13 +71,13 @@ public class PlayManager : MonoBehaviour
         holderCanvas.SetActive(false);
         state = State.Initialization;
 
-        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
-        cardManager = FindAnyObjectByType<CardManager>();
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
+        cardManager = FindAnyObjectByType<CardManager1>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject playerObject in playerObjects)
         {
-            Player playerComponent = playerObject.GetComponent<Player>();
+            Player1 playerComponent = playerObject.GetComponent<Player1>();
             if (playerComponent != null)
             {
                 allPlayers.Add(playerComponent);
@@ -145,8 +145,8 @@ public class PlayManager : MonoBehaviour
                 player4HaveChooseCard = false;
                 player4HaveGuessCard = false;
 
-                Player[] players = FindObjectsOfType<Player>();
-                foreach (Player player in players)
+                Player1[] players = FindObjectsOfType<Player1>();
+                foreach (Player1 player in players)
                 {
                     player.ShuffleCardPositions();
                 }
@@ -377,7 +377,7 @@ public class PlayManager : MonoBehaviour
 
         for (int i = 0; i < allPlayers.Count; i++)
         {
-            Player player = allPlayers[i];
+            Player1 player = allPlayers[i];
             GameObject winnerGameObject = GetWinnerGameObject(i + 1);
             player.transform.SetParent(winnerGameObject.transform);
         }
@@ -418,7 +418,7 @@ public class PlayManager : MonoBehaviour
     {
         playerScores.Clear();
 
-        foreach (Player player in allPlayers)
+        foreach (Player1 player in allPlayers)
         {
             int score = player.CalculateScore();
             playerScores.Add(player, score);
@@ -427,7 +427,7 @@ public class PlayManager : MonoBehaviour
 
     void OrderPlayerScores()
     {
-        List<Player> orderedPlayers = allPlayers.OrderBy(player => -playerScores[player]).ToList();
+        List<Player1> orderedPlayers = allPlayers.OrderBy(player => -playerScores[player]).ToList();
         allPlayers = orderedPlayers;
     }
 

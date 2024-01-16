@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardObject : MonoBehaviour
+public class CardObject1 : MonoBehaviour
 {
     public Image cardImage;
 
@@ -23,10 +23,10 @@ public class CardObject : MonoBehaviour
     public int cardNumber;
     public Button cardTouchButton;
 
-    private PlayManager playManager;
-    private Player player;
-    public BotBeheaviour botBeheaviour;
-    public CardHover cardHover;
+    private PlayManager1 playManager;
+    private Player1 player;
+    public BotBeheaviour1 botBeheaviour;
+    public CardHover1 cardHover;
 
     public Vector3 originalPosition;
     public Quaternion originalRotation;
@@ -35,16 +35,16 @@ public class CardObject : MonoBehaviour
     private void Start()
     {
         //cardTouchButton = GetComponentInChildren<Button>();
-        playManager = FindAnyObjectByType<PlayManager>();
+        playManager = FindAnyObjectByType<PlayManager1>();
         player1 = GameObject.Find("Player");
         player2 = GameObject.Find("Bot 1");
         player3 = GameObject.Find("Bot 2");
         player4 = GameObject.Find("Bot 3");
         questionPanel.SetActive(false);
 
-        cardHover = GetComponentInChildren<CardHover>();
+        cardHover = GetComponentInChildren<CardHover1>();
         cardImage = GetComponentInChildren<Image>();
-        botBeheaviour = FindAnyObjectByType<BotBeheaviour>();
+        botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
     }
 
 
@@ -56,7 +56,7 @@ public class CardObject : MonoBehaviour
 
     void Update()
     {
-        player = GetComponentInParent<Player>();
+        player = GetComponentInParent<Player1>();
         if (player.isBot)
         {
             cardImage.color = Color.black;
@@ -64,6 +64,11 @@ public class CardObject : MonoBehaviour
         if (!player.isBot)
         {
             cardImage.color = Color.white;
+        }
+
+        if(cardTouchButton.interactable)
+        {
+
         }
 
         if (!cardHover.PointerOnHover() && !LeanTween.isTweening())
@@ -86,10 +91,10 @@ public class CardObject : MonoBehaviour
 
     public void WrongAnser()
     {
-        PlayManager.State currentState = playManager.state;
+        PlayManager1.State currentState = playManager.state;
         switch (currentState)
         {
-            case PlayManager.State.Player1Turn:
+            case PlayManager1.State.Player1Turn:
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
@@ -97,7 +102,7 @@ public class CardObject : MonoBehaviour
                 playManager.player1HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player2Turn:
+            case PlayManager1.State.Player2Turn:
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
@@ -105,7 +110,7 @@ public class CardObject : MonoBehaviour
                 playManager.player2HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player3Turn:
+            case PlayManager1.State.Player3Turn:
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
@@ -113,7 +118,7 @@ public class CardObject : MonoBehaviour
                 playManager.player3HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player4Turn:
+            case PlayManager1.State.Player4Turn:
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
@@ -125,10 +130,10 @@ public class CardObject : MonoBehaviour
 
     public void CorrectAnswer()
     {
-        PlayManager.State currentState = playManager.state;
+        PlayManager1.State currentState = playManager.state;
         switch (currentState)
         {
-            case PlayManager.State.Player1Turn:
+            case PlayManager1.State.Player1Turn:
                 this.transform.SetParent(player1.transform);
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
@@ -137,7 +142,7 @@ public class CardObject : MonoBehaviour
                 playManager.player1HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player2Turn:
+            case PlayManager1.State.Player2Turn:
                 this.transform.SetParent(player2.transform);
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
@@ -146,7 +151,7 @@ public class CardObject : MonoBehaviour
                 playManager.player2HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player3Turn:
+            case PlayManager1.State.Player3Turn:
                 this.transform.SetParent(player3.transform);
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
@@ -155,7 +160,7 @@ public class CardObject : MonoBehaviour
                 playManager.player3HaveGuessCard = true;
                 break;
 
-            case PlayManager.State.Player4Turn:
+            case PlayManager1.State.Player4Turn:
                 this.transform.SetParent(player4.transform);
                 questionPanel.SetActive(false);
                 transitionPanel.SetActive(true);
@@ -168,16 +173,16 @@ public class CardObject : MonoBehaviour
 
     public void CardOnTouch()
     {
-        PlayManager.State currentState = playManager.state;
+        PlayManager1.State currentState = playManager.state;
 
-        CardObject[] allCards = FindObjectsOfType<CardObject>();
+        CardObject1[] allCards = FindObjectsOfType<CardObject1>();
 
         switch (currentState)
         {
-            case PlayManager.State.Player1Turn:
+            case PlayManager1.State.Player1Turn:
                 if (playManager.player1HaveCheckCard && !playManager.player1HaveChooseCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
@@ -187,7 +192,7 @@ public class CardObject : MonoBehaviour
                 
                 if (!playManager.player1HaveCheckCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -206,10 +211,10 @@ public class CardObject : MonoBehaviour
 
                 break;
 
-            case PlayManager.State.Player2Turn:
+            case PlayManager1.State.Player2Turn:
                 if (playManager.player2HaveCheckCard && !playManager.player2HaveChooseCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
@@ -219,7 +224,7 @@ public class CardObject : MonoBehaviour
 
                 if (!playManager.player2HaveCheckCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -243,10 +248,10 @@ public class CardObject : MonoBehaviour
 
                 break;
             
-            case PlayManager.State.Player3Turn:
+            case PlayManager1.State.Player3Turn:
                 if (playManager.player3HaveCheckCard && !playManager.player3HaveChooseCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
@@ -256,7 +261,7 @@ public class CardObject : MonoBehaviour
 
                 if (!playManager.player3HaveCheckCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
@@ -275,10 +280,10 @@ public class CardObject : MonoBehaviour
 
                 break;
     
-            case PlayManager.State.Player4Turn:
+            case PlayManager1.State.Player4Turn:
                 if (playManager.player4HaveCheckCard && !playManager.player4HaveChooseCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
@@ -288,7 +293,7 @@ public class CardObject : MonoBehaviour
 
                 if (!playManager.player4HaveCheckCard)
                 {
-                    foreach (CardObject card in allCards)
+                    foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
                         {
