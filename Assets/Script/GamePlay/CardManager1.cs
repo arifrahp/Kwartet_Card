@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class CardManager1 : MonoBehaviour
 {
-    //tes
-    //tis
-    //tus
     public List<GameObject> allCards;
     public List<GameObject> listPlayer;
     public GameObject restOfCard;
