@@ -51,7 +51,7 @@ public class RestOfCard1 : MonoBehaviour
                     localPosition.y = 0f;
                     localPosition.z = 0f;
 
-                    Quaternion localRotation = Quaternion.Euler(0f, 35f, 0f);
+                    Quaternion localRotation = Quaternion.Euler(0f, 11f, 0f);
 
                     child.localPosition = localPosition;
                     child.localRotation = localRotation;

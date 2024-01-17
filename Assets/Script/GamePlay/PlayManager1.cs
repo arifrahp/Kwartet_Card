@@ -130,20 +130,20 @@ public class PlayManager1 : MonoBehaviour
             if (!isAddUp)
             {
                 player1HaveCheckCard = false;
-                player1HaveChooseCard = false;
                 player1HaveGuessCard = false;
+                player1HaveChooseCard = false;
 
                 player2HaveCheckCard = false;
-                player2HaveChooseCard = false;
                 player2HaveGuessCard = false;
+                player2HaveChooseCard = false;
 
                 player3HaveCheckCard = false;
-                player3HaveChooseCard = false;
                 player3HaveGuessCard = false;
+                player3HaveChooseCard = false;
 
                 player4HaveCheckCard = false;
-                player4HaveChooseCard = false;
                 player4HaveGuessCard = false;
+                player4HaveChooseCard = false;
 
                 Player1[] players = FindObjectsOfType<Player1>();
                 foreach (Player1 player in players)
@@ -199,7 +199,7 @@ public class PlayManager1 : MonoBehaviour
                     Invoke("BotGetInteractableButton", 2f);
                     botBeheaviour.ClickRandomButton();
                 }
-                if (player1HaveCheckCard && player1HaveChooseCard && !player1HaveGuessCard)
+                if (player1HaveCheckCard && !player1HaveChooseCard && player1HaveGuessCard)
                 {
                     Debug.Log("masuk3");
                     Invoke("BotGetInteractableButton", 2f);
@@ -250,7 +250,7 @@ public class PlayManager1 : MonoBehaviour
                     Invoke("BotGetInteractableButton", 2f);
                     botBeheaviour.ClickRandomButton();
                 }
-                if (player2HaveCheckCard && player2HaveChooseCard && !player2HaveGuessCard)
+                if (player2HaveCheckCard && !player2HaveChooseCard && player2HaveGuessCard)
                 {
                     Debug.Log("masuk3");
                     Invoke("BotGetInteractableButton", 2f);
@@ -301,7 +301,7 @@ public class PlayManager1 : MonoBehaviour
                     Invoke("BotGetInteractableButton", 2f);
                     botBeheaviour.ClickRandomButton();
                 }
-                if (player3HaveCheckCard && player3HaveChooseCard && !player3HaveGuessCard)
+                if (player3HaveCheckCard && !player3HaveChooseCard && player3HaveGuessCard)
                 {
                     Debug.Log("masuk3");
                     Invoke("BotGetInteractableButton", 2f);
@@ -351,7 +351,7 @@ public class PlayManager1 : MonoBehaviour
                     Invoke("BotGetInteractableButton", 2f);
                     botBeheaviour.ClickRandomButton();
                 }
-                if (player4HaveCheckCard && player4HaveChooseCard && !player4HaveGuessCard)
+                if (player4HaveCheckCard && !player4HaveChooseCard && player4HaveGuessCard)
                 {
                     Debug.Log("masuk3");
                     Invoke("BotGetInteractableButton", 2f);

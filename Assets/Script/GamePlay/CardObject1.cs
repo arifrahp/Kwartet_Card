@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class CardObject1 : MonoBehaviour
 {
+    public bool isThrow = false;
     public Image cardImage;
 
     public GameObject player1;
@@ -78,9 +79,10 @@ public class CardObject1 : MonoBehaviour
             cardTouchButton.interactable = false;
         }
 
-        if (cardTouchButton.interactable)
+        if (isThrow)
         {
-
+            cardImage.color = Color.white;
+            cardTouchButton.interactable = false;
         }
 
         if (!cardHover.PointerOnHover() && !LeanTween.isTweening())
@@ -111,6 +113,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player1.SetChildCardInteractable();
                 playManager.player1HaveGuessCard = true;
                 break;
 
@@ -119,6 +122,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player2.SetChildCardInteractable();
                 playManager.player2HaveGuessCard = true;
                 break;
 
@@ -127,6 +131,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player3.SetChildCardInteractable();
                 playManager.player3HaveGuessCard = true;
                 break;
 
@@ -135,10 +140,14 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player4.SetChildCardInteractable();
                 playManager.player4HaveGuessCard = true;
                 break;
         }
-        restOfCard.CardGoesToPlayer();
+        if(restOfCard.cards.Count > 0)
+        {
+            restOfCard.CardGoesToPlayer();
+        }
     }
 
     public void CorrectAnswer()
@@ -152,6 +161,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player1.SetChildCardInteractable();
                 playManager.player1HaveGuessCard = true;
                 break;
 
@@ -161,6 +171,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player2.SetChildCardInteractable();
                 playManager.player2HaveGuessCard = true;
                 break;
 
@@ -170,6 +181,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player3.SetChildCardInteractable();
                 playManager.player3HaveGuessCard = true;
                 break;
 
@@ -179,6 +191,7 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
+                playManager.player4.SetChildCardInteractable();
                 playManager.player4HaveGuessCard = true;
                 break;
         }
@@ -193,17 +206,19 @@ public class CardObject1 : MonoBehaviour
         switch (currentState)
         {
             case PlayManager1.State.Player1Turn:
-                if (playManager.player1HaveCheckCard && !playManager.player1HaveChooseCard)
+
+                if (playManager.player1HaveCheckCard && !playManager.player1HaveGuessCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
-                    if(idCard == player.cardIDHolder)
+
+                    if(idCard == playManager.player1.cardIDHolder)
                     {
                         CorrectAnswer();
                     }
-                    else if(idCard != player.cardIDHolder)
+                    else if(idCard != playManager.player1.cardIDHolder)
                     {
                         WrongAnser();
                     }
@@ -214,21 +229,24 @@ public class CardObject1 : MonoBehaviour
                 if (!playManager.player1HaveCheckCard)
                 {
                     player.cardIDHolder = idCard;
-                    /*foreach (CardObject1 card in allCards)
-                    {
-                        if (card.idCard == idCard)
-                        {
-                            card.cardTouchButton.interactable = true;
-                        }
-                        else
-                        {
-                            card.cardTouchButton.interactable = false;
-                        }
-                    }*/
                     playManager.player2.SetCardButtonInteractable(idCard);
                     playManager.player3.SetCardButtonInteractable(idCard);
                     playManager.player4.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+    
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player1HaveCheckCard = true;
                 }
                 else
@@ -237,18 +255,19 @@ public class CardObject1 : MonoBehaviour
                 break;
 
             case PlayManager1.State.Player2Turn:
-                if (playManager.player2HaveCheckCard && !playManager.player2HaveChooseCard)
+
+                if (playManager.player2HaveCheckCard && !playManager.player2HaveGuessCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
 
-                    if (idCard == player.cardIDHolder)
+                    if (idCard == playManager.player2.cardIDHolder)
                     {
                         CorrectAnswer();
                     }
-                    else if (idCard != player.cardIDHolder)
+                    else if (idCard != playManager.player2.cardIDHolder)
                     {
                         WrongAnser();
                     }
@@ -260,20 +279,24 @@ public class CardObject1 : MonoBehaviour
                 {
                     player.cardIDHolder = idCard;
                     foreach (CardObject1 card in allCards)
-                    /*{
-                        if (card.idCard == idCard)
-                        {
-                            card.cardTouchButton.interactable = true;
-                        }
-                        else
-                        {
-                            card.cardTouchButton.interactable = false;
-                        }
-                    }*/
                     playManager.player1.SetCardButtonInteractable(idCard);
                     playManager.player3.SetCardButtonInteractable(idCard);
                     playManager.player4.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player2HaveChooseCard = true;
+                        playManager.player2HaveGuessCard = true;
+                    }
+
                     playManager.player2HaveCheckCard = true;
                 }
                 else
@@ -282,18 +305,19 @@ public class CardObject1 : MonoBehaviour
                 break;
             
             case PlayManager1.State.Player3Turn:
-                if (playManager.player3HaveCheckCard && !playManager.player3HaveChooseCard)
+
+                if (playManager.player3HaveCheckCard && !playManager.player3HaveGuessCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
 
-                    if (idCard == player.cardIDHolder)
+                    if (idCard == playManager.player3.cardIDHolder)
                     {
                         CorrectAnswer();
                     }
-                    else if (idCard != player.cardIDHolder)
+                    else if (idCard != playManager.player3.cardIDHolder)
                     {
                         WrongAnser();
                     }
@@ -304,21 +328,24 @@ public class CardObject1 : MonoBehaviour
                 if (!playManager.player3HaveCheckCard)
                 {
                     player.cardIDHolder = idCard;
-                    /*foreach (CardObject1 card in allCards)
-                    {
-                        if (card.idCard == idCard)
-                        {
-                            card.cardTouchButton.interactable = true;
-                        }
-                        else
-                        {
-                            card.cardTouchButton.interactable = false;
-                        }
-                    }*/
                     playManager.player1.SetCardButtonInteractable(idCard);
                     playManager.player2.SetCardButtonInteractable(idCard);
                     playManager.player4.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player3HaveChooseCard = true;
+                        playManager.player3HaveGuessCard = true;
+                    }
+
                     playManager.player3HaveCheckCard = true;
                 }
                 else
@@ -327,18 +354,19 @@ public class CardObject1 : MonoBehaviour
                 break;
     
             case PlayManager1.State.Player4Turn:
-                if (playManager.player4HaveCheckCard && !playManager.player4HaveChooseCard)
+
+                if (playManager.player4HaveCheckCard && !playManager.player4HaveGuessCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
 
-                    if (idCard == player.cardIDHolder)
+                    if (idCard == playManager.player4.cardIDHolder)
                     {
                         CorrectAnswer();
                     }
-                    else if (idCard != player.cardIDHolder)
+                    else if (idCard != playManager.player4.cardIDHolder)
                     {
                         WrongAnser();
                     }
@@ -349,21 +377,24 @@ public class CardObject1 : MonoBehaviour
                 if (!playManager.player4HaveCheckCard)
                 {
                     player.cardIDHolder = idCard;
-                    /*foreach (CardObject1 card in allCards)
-                    {
-                        if (card.idCard == idCard)
-                        {
-                            card.cardTouchButton.interactable = true;
-                        }
-                        else
-                        {
-                            card.cardTouchButton.interactable = false;
-                        }
-                    }*/
                     playManager.player1.SetCardButtonInteractable(idCard);
                     playManager.player2.SetCardButtonInteractable(idCard);
                     playManager.player3.SetCardButtonInteractable(idCard);
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player4HaveChooseCard = true;
+                        playManager.player4HaveGuessCard = true;
+                    }
+
                     playManager.player4HaveCheckCard = true;
                 }
                 else
@@ -379,7 +410,7 @@ public class CardObject1 : MonoBehaviour
         LeanTween.cancel(this.gameObject);
 
         // Move the object to a new position and rotation in world space
-        LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 0.5f, -1), 0.3f);
+        LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 1.2f, -3), 0.3f);
         LeanTween.rotateLocal(this.gameObject, Vector3.zero, 0.3f);
     }
 

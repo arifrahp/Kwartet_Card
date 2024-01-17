@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 18914744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -6.02, y: 2.5, z: 7}
+  m_LocalPosition: {x: -7.02, y: 2.5, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,6 +171,9 @@ MonoBehaviour:
   score: 0
   isBot: 1
   botBeheaviour: {fileID: 0}
+  cardIDHolder: 0
+  throwCards: 
+  nonThrowCards: 
 --- !u!1 &20990135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,7 +2173,7 @@ Transform:
   m_GameObject: {fileID: 511469057}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 2.5, y: 2.84, z: 7}
+  m_LocalPosition: {x: 2.5, y: 3.54, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2192,6 +2195,9 @@ MonoBehaviour:
   score: 0
   isBot: 1
   botBeheaviour: {fileID: 0}
+  cardIDHolder: 0
+  throwCards: 
+  nonThrowCards: 
 --- !u!1 &565862832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,7 +2791,7 @@ Transform:
   m_GameObject: {fileID: 775264962}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -2.84, z: 7}
+  m_LocalPosition: {x: -2.5, y: -3.34, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2807,6 +2813,9 @@ MonoBehaviour:
   score: 0
   isBot: 0
   botBeheaviour: {fileID: 0}
+  cardIDHolder: 0
+  throwCards: 
+  nonThrowCards: 
 --- !u!1 &904400820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3439,7 +3448,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -3465,7 +3474,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4253,7 +4262,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 7.72}
-  m_LocalScale: {x: 18.16, y: 10.4, z: 1}
+  m_LocalScale: {x: 20.29, y: 11.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5555,7 +5564,7 @@ Transform:
   m_GameObject: {fileID: 1447789786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 6.02, y: -2.5, z: 7}
+  m_LocalPosition: {x: 7.02, y: -2.5, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5577,6 +5586,9 @@ MonoBehaviour:
   score: 0
   isBot: 1
   botBeheaviour: {fileID: 0}
+  cardIDHolder: 0
+  throwCards: 
+  nonThrowCards: 
 --- !u!1 &1455289574
 GameObject:
   m_ObjectHideFlags: 0
@@ -6739,6 +6751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player3: {fileID: 0}
+  player4: {fileID: 0}
 --- !u!4 &1871382426
 Transform:
   m_ObjectHideFlags: 0
