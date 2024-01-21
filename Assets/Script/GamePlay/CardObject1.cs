@@ -198,47 +198,30 @@ public class CardObject1 : MonoBehaviour
         switch (currentState)
         {
             case PlayManager1.State.Player1Turn:
-
-                if (playManager.player1HaveCheckCard && !playManager.player1HaveGuessCard)
+                if (playManager.player1HaveCheckCard && !playManager.player1HaveChooseCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
-
-                    if(idCard == playManager.player1.cardIDHolder)
-                    {
-                        CorrectAnswer();
-                    }
-                    else if(idCard != playManager.player1.cardIDHolder)
-                    {
-                        WrongAnser();
-                    }
-
+                    questionPanel.SetActive(true);
                     playManager.player1HaveChooseCard = true;
                 }
-                
+
                 if (!playManager.player1HaveCheckCard)
                 {
-                    player.cardIDHolder = idCard;
-                    playManager.player2.SetCardButtonInteractable(idCard);
-                    playManager.player3.SetCardButtonInteractable(idCard);
-                    playManager.player4.SetCardButtonInteractable(idCard);
-                    player.SetChildCardNotInteractable();
-
-                    if (playManager.player2.CheckNoInteractableCards()
-                        && playManager.player3.CheckNoInteractableCards()
-                        && playManager.player4.CheckNoInteractableCards())
+                    foreach (CardObject1 card in allCards)
                     {
-                        if (restOfCard.cards.Count > 0)
+                        if (card.idCard == idCard)
                         {
-                            restOfCard.CardGoesToPlayer();
+                            card.cardTouchButton.interactable = true;
                         }
-    
-                        playManager.player1HaveChooseCard = true;
-                        playManager.player1HaveGuessCard = true;
+                        else
+                        {
+                            card.cardTouchButton.interactable = false;
+                        }
                     }
-
+                    player.SetChildCardNotInteractable();
                     playManager.player1HaveCheckCard = true;
                 }
                 else
@@ -247,146 +230,94 @@ public class CardObject1 : MonoBehaviour
                 break;
 
             case PlayManager1.State.Player2Turn:
-
-                if (playManager.player2HaveCheckCard && !playManager.player2HaveGuessCard)
+                if (playManager.player2HaveCheckCard && !playManager.player2HaveChooseCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
-
-                    if (idCard == playManager.player2.cardIDHolder)
-                    {
-                        CorrectAnswer();
-                    }
-                    else if (idCard != playManager.player2.cardIDHolder)
-                    {
-                        WrongAnser();
-                    }
-
+                    questionPanel.SetActive(true);
                     playManager.player2HaveChooseCard = true;
                 }
 
                 if (!playManager.player2HaveCheckCard)
                 {
-                    player.cardIDHolder = idCard;
                     foreach (CardObject1 card in allCards)
-                    playManager.player1.SetCardButtonInteractable(idCard);
-                    playManager.player3.SetCardButtonInteractable(idCard);
-                    playManager.player4.SetCardButtonInteractable(idCard);
-                    player.SetChildCardNotInteractable();
-
-                    if (playManager.player1.CheckNoInteractableCards()
-                        && playManager.player3.CheckNoInteractableCards()
-                        && playManager.player4.CheckNoInteractableCards())
                     {
-                        if (restOfCard.cards.Count > 0)
+                        if (card.idCard == idCard)
                         {
-                            restOfCard.CardGoesToPlayer();
+                            card.cardTouchButton.interactable = true;
                         }
-
-                        playManager.player2HaveChooseCard = true;
-                        playManager.player2HaveGuessCard = true;
+                        else
+                        {
+                            card.cardTouchButton.interactable = false;
+                        }
                     }
-
+                    player.SetChildCardNotInteractable();
                     playManager.player2HaveCheckCard = true;
                 }
                 else
                     return;
 
                 break;
-            
-            case PlayManager1.State.Player3Turn:
 
-                if (playManager.player3HaveCheckCard && !playManager.player3HaveGuessCard)
+            case PlayManager1.State.Player3Turn:
+                if (playManager.player3HaveCheckCard && !playManager.player3HaveChooseCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
-
-                    if (idCard == playManager.player3.cardIDHolder)
-                    {
-                        CorrectAnswer();
-                    }
-                    else if (idCard != playManager.player3.cardIDHolder)
-                    {
-                        WrongAnser();
-                    }
-
+                    questionPanel.SetActive(true);
                     playManager.player3HaveChooseCard = true;
                 }
 
                 if (!playManager.player3HaveCheckCard)
                 {
-                    player.cardIDHolder = idCard;
-                    playManager.player1.SetCardButtonInteractable(idCard);
-                    playManager.player2.SetCardButtonInteractable(idCard);
-                    playManager.player4.SetCardButtonInteractable(idCard);
-                    player.SetChildCardNotInteractable();
-
-                    if (playManager.player1.CheckNoInteractableCards()
-                        && playManager.player2.CheckNoInteractableCards()
-                        && playManager.player4.CheckNoInteractableCards())
+                    foreach (CardObject1 card in allCards)
                     {
-                        if (restOfCard.cards.Count > 0)
+                        if (card.idCard == idCard)
                         {
-                            restOfCard.CardGoesToPlayer();
+                            card.cardTouchButton.interactable = true;
                         }
-
-                        playManager.player3HaveChooseCard = true;
-                        playManager.player3HaveGuessCard = true;
+                        else
+                        {
+                            card.cardTouchButton.interactable = false;
+                        }
                     }
-
+                    player.SetChildCardNotInteractable();
                     playManager.player3HaveCheckCard = true;
                 }
                 else
                     return;
 
                 break;
-    
-            case PlayManager1.State.Player4Turn:
 
-                if (playManager.player4HaveCheckCard && !playManager.player4HaveGuessCard)
+            case PlayManager1.State.Player4Turn:
+                if (playManager.player4HaveCheckCard && !playManager.player4HaveChooseCard)
                 {
                     foreach (CardObject1 card in allCards)
                     {
                         card.cardTouchButton.interactable = false;
                     }
-
-                    if (idCard == playManager.player4.cardIDHolder)
-                    {
-                        CorrectAnswer();
-                    }
-                    else if (idCard != playManager.player4.cardIDHolder)
-                    {
-                        WrongAnser();
-                    }
-
+                    questionPanel.SetActive(true);
                     playManager.player4HaveChooseCard = true;
                 }
 
                 if (!playManager.player4HaveCheckCard)
                 {
-                    player.cardIDHolder = idCard;
-                    playManager.player1.SetCardButtonInteractable(idCard);
-                    playManager.player2.SetCardButtonInteractable(idCard);
-                    playManager.player3.SetCardButtonInteractable(idCard);
-                    player.SetChildCardNotInteractable();
-
-                    if (playManager.player1.CheckNoInteractableCards()
-                        && playManager.player2.CheckNoInteractableCards()
-                        && playManager.player3.CheckNoInteractableCards())
+                    foreach (CardObject1 card in allCards)
                     {
-                        if (restOfCard.cards.Count > 0)
+                        if (card.idCard == idCard)
                         {
-                            restOfCard.CardGoesToPlayer();
+                            card.cardTouchButton.interactable = true;
                         }
-
-                        playManager.player4HaveChooseCard = true;
-                        playManager.player4HaveGuessCard = true;
+                        else
+                        {
+                            card.cardTouchButton.interactable = false;
+                        }
                     }
-
+                    player.SetChildCardNotInteractable();
                     playManager.player4HaveCheckCard = true;
                 }
                 else
