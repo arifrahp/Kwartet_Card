@@ -222,6 +222,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player1HaveCheckCard = true;
                 }
                 else
@@ -254,6 +268,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player2HaveCheckCard = true;
                 }
                 else
@@ -286,6 +314,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player3HaveCheckCard = true;
                 }
                 else
@@ -318,6 +360,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player4HaveCheckCard = true;
                 }
                 else
