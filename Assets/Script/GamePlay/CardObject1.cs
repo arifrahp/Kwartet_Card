@@ -113,7 +113,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player1.SetChildCardInteractable();
                 playManager.player1HaveGuessCard = true;
                 break;
 
@@ -122,7 +121,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player2.SetChildCardInteractable();
                 playManager.player2HaveGuessCard = true;
                 break;
 
@@ -131,7 +129,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player3.SetChildCardInteractable();
                 playManager.player3HaveGuessCard = true;
                 break;
 
@@ -140,7 +137,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Salah";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player4.SetChildCardInteractable();
                 playManager.player4HaveGuessCard = true;
                 break;
         }
@@ -161,7 +157,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player1.SetChildCardInteractable();
                 playManager.player1HaveGuessCard = true;
                 break;
 
@@ -171,7 +166,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player2.SetChildCardInteractable();
                 playManager.player2HaveGuessCard = true;
                 break;
 
@@ -181,7 +175,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player3.SetChildCardInteractable();
                 playManager.player3HaveGuessCard = true;
                 break;
 
@@ -191,7 +184,6 @@ public class CardObject1 : MonoBehaviour
                 transitionPanel.SetActive(true);
                 transitionText.text = "Benar";
                 StartCoroutine(DeactivateQuestionPanel());
-                playManager.player4.SetChildCardInteractable();
                 playManager.player4HaveGuessCard = true;
                 break;
         }
