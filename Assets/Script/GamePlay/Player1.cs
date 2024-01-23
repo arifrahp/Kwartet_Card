@@ -14,12 +14,17 @@ public class Player1 : MonoBehaviour
 
     public bool isBot;
     public BotBeheaviour1 botBeheaviour;
+    public int cardIDHolder;
+
+    public List<int> throwCards = new List<int>();
+    public List<int> nonThrowCards = new List<int>();
 
     void Start()
     {
         PopulateCardIDs();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
     }
+
 
     public void PopulateCardIDs()
     {
@@ -43,7 +48,7 @@ public class Player1 : MonoBehaviour
                     localPosition.y = 0f;
                     localPosition.z = 0f;
 
-                    Quaternion localRotation = Quaternion.Euler(0f, 35f, 0f);
+                    Quaternion localRotation = Quaternion.Euler(0f, 11f, 0f);
 
                     child.localPosition = localPosition;
                     child.localRotation = localRotation;
@@ -56,6 +61,7 @@ public class Player1 : MonoBehaviour
         }
 
     }
+
 
     public void ShuffleCardPositions()
     {
@@ -87,7 +93,7 @@ public class Player1 : MonoBehaviour
             localPosition.y = 0f;
             localPosition.z = 0f;
 
-            Quaternion localRotation = Quaternion.Euler(0f, 35f, 0f);
+            Quaternion localRotation = Quaternion.Euler(0f, 11f, 0f);
 
             cardTransform.localPosition = localPosition;
             cardTransform.localRotation = localRotation;
@@ -200,6 +206,47 @@ public class Player1 : MonoBehaviour
             }
         }
     }
+    
+    public void SetChildCardInteractable()
+    {
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+
+            if (cardButton != null)
+            {
+                cardButton.interactable = true;
+            }
+        }
+    }
+
+    public void SetCardButtonInteractable(int tempIDHolder)
+    {
+        bool anyCardMatchesID = false;
+
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
+
+            if (cardObject != null)
+            {
+                if (cardObject.idCard == tempIDHolder)
+                {
+                    anyCardMatchesID = true;
+                    break;  // No need to continue checking once a match is found
+                }
+            }
+        }
+
+        // Set interactable property based on whether any child card has the same ID
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+            cardButton.interactable = anyCardMatchesID;
+        }
+    }
+
 
     public bool CheckCardIsZero()
     {

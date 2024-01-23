@@ -19,7 +19,7 @@ public class MySceneManager : MonoBehaviour
 
     public void ToGameScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameScene1");
         Time.timeScale = 1f;
     }
 

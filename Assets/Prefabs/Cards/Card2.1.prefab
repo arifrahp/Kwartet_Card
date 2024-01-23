@@ -206,7 +206,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3038114066246134872}
@@ -226,18 +226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fad9928b8e954ba9b1275b6f0c060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isThrow: 0
   cardImage: {fileID: 0}
   player1: {fileID: 0}
   player2: {fileID: 0}
   player3: {fileID: 0}
   player4: {fileID: 0}
+  restOfCards: {fileID: 0}
   questionPanel: {fileID: 8852423951628061667}
   transitionPanel: {fileID: 207681943261560068}
   transitionText: {fileID: 3801883774788430376}
   idCard: 2
   cardNumber: 1
   cardTouchButton: {fileID: 5805101630440117038}
-  botBeheaviour: {fileID: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1377032342922401403
@@ -305,7 +306,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: VOC Memonopoli Lada di Banten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1005,6 +1006,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardObject: {fileID: 0}
+  thisButton: {fileID: 0}
+  cardButtonCanvas: {fileID: 0}
 --- !u!1 &4539357600392548083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Banten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1440,7 +1443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Perang Banten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2185,7 +2188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 1651
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1825-1830
+  m_text: 1816
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Yogyakarta
+  m_text: Maluku
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Belanda Ikut Campur Urusan Kraton
+  m_text: Belanda Memonopoli Maluku
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Perang Gerilya
+  m_text: Menyerang Benteng Zeelandia
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 7710279647609942791}
   - component: {fileID: 483334086729754827}
   - component: {fileID: 7739059236359197183}
-  - component: {fileID: 4929214877449457697}
+  - component: {fileID: 1024893384981690815}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4717409e5f66c224795aef1dc5f56b1c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 97782bbb504bcbd4b8595c7c8bdc8ec4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -891,7 +891,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4929214877449457697
+--- !u!114 &1024893384981690815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 6255730066644899979}
   - component: {fileID: 2428770827392171999}
   m_Layer: 0
-  m_Name: Card3.4
+  m_Name: Card6.4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2122,7 +2122,7 @@ MonoBehaviour:
   questionPanel: {fileID: 3520669202278828680}
   transitionPanel: {fileID: 4968956474347285834}
   transitionText: {fileID: 3713791527503881879}
-  idCard: 3
+  idCard: 6
   cardNumber: 4
   cardTouchButton: {fileID: 7739059236359197183}
   originalPosition: {x: 0, y: 0, z: 0}

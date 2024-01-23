@@ -8,8 +8,10 @@ public class CardManager1 : MonoBehaviour
 {
     //tes
     //tis
+    //tus
     public List<GameObject> allCards;
     public List<GameObject> listPlayer;
+    public GameObject restOfCard;
 
     private int currentGroupID = 1;
 
@@ -82,30 +84,37 @@ public class CardManager1 : MonoBehaviour
             shuffledCards[randomIndex] = temp;
         }
 
-        // Instantiate the shuffled cards
         int cardsPerGroup = 4;
 
-        for (int i = 0; i < shuffledCards.Count; i++)
+        for (int i = 0; i < listPlayer.Count; i++)
         {
-            GameObject cardPrefab = shuffledCards[i];
-            GameObject card = Instantiate(cardPrefab);
-
-            CardObject1 cardObject = card.GetComponent<CardObject1>();
-
-            if (cardObject != null)
+            // Instantiate the shuffled cards for each player
+            for (int j = 0; j < cardsPerGroup; j++)
             {
-                // No need to assign idCard here as it's already assigned in AssignCardIDs
-            }
+                int cardIndex = i * cardsPerGroup + j;
 
-            // Parent the card to the current player (you can modify this logic)
-            if (listPlayer.Count > 0)
-            {
-                Transform playerTransform = listPlayer[i / cardsPerGroup].transform;
-                card.transform.SetParent(playerTransform);
+                if (cardIndex < shuffledCards.Count)
+                {
+                    GameObject cardPrefab = shuffledCards[cardIndex];
+                    GameObject card = Instantiate(cardPrefab, listPlayer[i].transform); // Instantiate with the intended parent
+                    CardObject1 cardObject = card.GetComponent<CardObject1>();
+
+                    if (cardObject != null)
+                    {
+                        // No need to assign idCard here as it's already assigned in AssignCardIDs
+                    }
+                }
             }
         }
-    }
 
+        // Remaining cards are assigned to restOfCard
+        for (int i = listPlayer.Count * cardsPerGroup; i < shuffledCards.Count; i++)
+        {
+            GameObject remainingCardPrefab = shuffledCards[i];
+            GameObject remainingCard = Instantiate(remainingCardPrefab, restOfCard.transform); // Instantiate with the intended parent
+                                                                                               // You may want to set properties or perform additional setup here
+        }
+    }
 
     void Update()
     {

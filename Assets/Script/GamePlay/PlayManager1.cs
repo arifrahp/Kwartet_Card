@@ -130,20 +130,20 @@ public class PlayManager1 : MonoBehaviour
             if (!isAddUp)
             {
                 player1HaveCheckCard = false;
-                player1HaveChooseCard = false;
                 player1HaveGuessCard = false;
+                player1HaveChooseCard = false;
 
                 player2HaveCheckCard = false;
-                player2HaveChooseCard = false;
                 player2HaveGuessCard = false;
+                player2HaveChooseCard = false;
 
                 player3HaveCheckCard = false;
-                player3HaveChooseCard = false;
                 player3HaveGuessCard = false;
+                player3HaveChooseCard = false;
 
                 player4HaveCheckCard = false;
-                player4HaveChooseCard = false;
                 player4HaveGuessCard = false;
+                player4HaveChooseCard = false;
 
                 Player1[] players = FindObjectsOfType<Player1>();
                 foreach (Player1 player in players)

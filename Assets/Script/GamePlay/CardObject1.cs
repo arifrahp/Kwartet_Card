@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 public class CardObject1 : MonoBehaviour
 {
+    public bool isThrow = false;
     public Image cardImage;
 
     public GameObject player1;
     public GameObject player2;
     public GameObject player3;
     public GameObject player4;
+    public GameObject restOfCards;
 
     public GameObject questionPanel;
     public GameObject transitionPanel;
@@ -25,8 +27,9 @@ public class CardObject1 : MonoBehaviour
 
     private PlayManager1 playManager;
     private Player1 player;
-    public BotBeheaviour1 botBeheaviour;
-    public CardHover1 cardHover;
+    private BotBeheaviour1 botBeheaviour;
+    private CardHover1 cardHover;
+    private RestOfCard1 restOfCard;
 
     public Vector3 originalPosition;
     public Quaternion originalRotation;
@@ -40,11 +43,13 @@ public class CardObject1 : MonoBehaviour
         player2 = GameObject.Find("Bot 1");
         player3 = GameObject.Find("Bot 2");
         player4 = GameObject.Find("Bot 3");
+        restOfCards = GameObject.Find("RestOfCard");
         questionPanel.SetActive(false);
 
         cardHover = GetComponentInChildren<CardHover1>();
         cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
+        restOfCard = FindAnyObjectByType<RestOfCard1>();
     }
 
 
@@ -57,18 +62,27 @@ public class CardObject1 : MonoBehaviour
     void Update()
     {
         player = GetComponentInParent<Player1>();
-        if (player.isBot)
+        if(this.gameObject.transform.parent != restOfCards.transform)
+        {
+            if (player.isBot)
+            {
+                cardImage.color = Color.black;
+            }
+            if (!player.isBot)
+            {
+                cardImage.color = Color.white;
+            }
+        }
+        if (this.gameObject.transform.parent == restOfCards.transform)
         {
             cardImage.color = Color.black;
+            cardTouchButton.interactable = false;
         }
-        if (!player.isBot)
+
+        if (isThrow)
         {
             cardImage.color = Color.white;
-        }
-
-        if(cardTouchButton.interactable)
-        {
-
+            cardTouchButton.interactable = false;
         }
 
         if (!cardHover.PointerOnHover() && !LeanTween.isTweening())
@@ -125,6 +139,10 @@ public class CardObject1 : MonoBehaviour
                 StartCoroutine(DeactivateQuestionPanel());
                 playManager.player4HaveGuessCard = true;
                 break;
+        }
+        if(restOfCard.cards.Count > 0)
+        {
+            restOfCard.CardGoesToPlayer();
         }
     }
 
@@ -189,7 +207,7 @@ public class CardObject1 : MonoBehaviour
                     questionPanel.SetActive(true);
                     playManager.player1HaveChooseCard = true;
                 }
-                
+
                 if (!playManager.player1HaveCheckCard)
                 {
                     foreach (CardObject1 card in allCards)
@@ -204,6 +222,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player1HaveCheckCard = true;
                 }
                 else
@@ -236,18 +268,27 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
-                    /*if (player.isBot)
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
                     {
-                        Invoke("BotGetInteractableButton", 6f);
-                        botBeheaviour.ClickRandomButton();
-                    }*/
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player2HaveCheckCard = true;
                 }
                 else
                     return;
 
                 break;
-            
+
             case PlayManager1.State.Player3Turn:
                 if (playManager.player3HaveCheckCard && !playManager.player3HaveChooseCard)
                 {
@@ -273,13 +314,27 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player4.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player3HaveCheckCard = true;
                 }
                 else
                     return;
 
                 break;
-    
+
             case PlayManager1.State.Player4Turn:
                 if (playManager.player4HaveCheckCard && !playManager.player4HaveChooseCard)
                 {
@@ -305,6 +360,20 @@ public class CardObject1 : MonoBehaviour
                         }
                     }
                     player.SetChildCardNotInteractable();
+
+                    if (playManager.player1.CheckNoInteractableCards()
+                        && playManager.player2.CheckNoInteractableCards()
+                        && playManager.player3.CheckNoInteractableCards())
+                    {
+                        if (restOfCard.cards.Count > 0)
+                        {
+                            restOfCard.CardGoesToPlayer();
+                        }
+
+                        playManager.player1HaveChooseCard = true;
+                        playManager.player1HaveGuessCard = true;
+                    }
+
                     playManager.player4HaveCheckCard = true;
                 }
                 else
@@ -320,7 +389,7 @@ public class CardObject1 : MonoBehaviour
         LeanTween.cancel(this.gameObject);
 
         // Move the object to a new position and rotation in world space
-        LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 0.5f, -1), 0.3f);
+        LeanTween.moveLocal(this.gameObject, originalPosition + new Vector3(0, 1.2f, -3), 0.3f);
         LeanTween.rotateLocal(this.gameObject, Vector3.zero, 0.3f);
     }
 
