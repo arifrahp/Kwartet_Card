@@ -52,6 +52,11 @@ public class PlayManager1 : MonoBehaviour
     public TMP_Text winner3Text;
     public TMP_Text winner4Text;
 
+    public bool player1IsDone = false;
+    public bool player2IsDone = false;
+    public bool player3IsDone = false;
+    public bool player4IsDone = false;
+
     private BotBeheaviour1 botBeheaviour;
     private CardManager1 cardManager;
 
@@ -125,7 +130,7 @@ public class PlayManager1 : MonoBehaviour
     {
         bool isAddUp = false;
 
-        if (roundCount != 20)
+        if (!player1IsDone || !player2IsDone || !player3IsDone || !player4IsDone)
         {
             if (!isAddUp)
             {
@@ -159,7 +164,7 @@ public class PlayManager1 : MonoBehaviour
                 state = State.Player1Turn;
             }
         }
-        if (roundCount == 20)
+        if (player1IsDone && player2IsDone && player3IsDone && player4IsDone)
         {
             state = State.GameOver;
         }
@@ -169,6 +174,7 @@ public class PlayManager1 : MonoBehaviour
     {
         if (player1.CheckCardIsZero())
         {
+            player1IsDone = true;
             state = State.Player2Turn;
         }
 
@@ -178,7 +184,10 @@ public class PlayManager1 : MonoBehaviour
                 player1CheckCard.Invoke();
 
             if (!player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard && player1.CheckNoInteractableCards())
+            {
+                player1IsDone = true;
                 state = State.Player2Turn;
+            }
             
 
             if (player1.isBot)
@@ -220,6 +229,7 @@ public class PlayManager1 : MonoBehaviour
     {
         if (player2.CheckCardIsZero())
         {
+            player2IsDone = true;
             state = State.Player3Turn;
         
         }
@@ -230,7 +240,10 @@ public class PlayManager1 : MonoBehaviour
                 player2CheckCard.Invoke();
 
             if (!player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard && player2.CheckNoInteractableCards())
+            {
+                player2IsDone = true;
                 state = State.Player3Turn;
+            }
 
             if (player2.isBot)
             {
@@ -272,6 +285,7 @@ public class PlayManager1 : MonoBehaviour
     {
         if (player3.CheckCardIsZero())
         {
+            player3IsDone = true;
             state = State.Player4Turn;
         }
 
@@ -281,7 +295,10 @@ public class PlayManager1 : MonoBehaviour
                 player3CheckCard.Invoke();
 
             if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard && player3.CheckNoInteractableCards())
+            {
+                player3IsDone = true;
                 state = State.Player4Turn;
+            }
 
             if (player3.isBot)
             {
@@ -322,6 +339,7 @@ public class PlayManager1 : MonoBehaviour
     {
         if (player4.CheckCardIsZero())
         {
+            player4IsDone = true;
             state = State.Initialization;
         }
 
@@ -331,7 +349,10 @@ public class PlayManager1 : MonoBehaviour
                 player4CheckCard.Invoke();
 
             if (!player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard && player4.CheckNoInteractableCards())
+            {
+                player4IsDone = true;
                 state = State.Initialization;
+            }
 
             if (player4.isBot)
             {
