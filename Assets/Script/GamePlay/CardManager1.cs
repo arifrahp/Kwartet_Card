@@ -24,7 +24,7 @@ public class CardManager1 : MonoBehaviour
         InstantiateCardsRandomly();
 
         // Get all GameObjects with the "Player" tag
-        GameObject[] allPanelObjects = Resources.FindObjectsOfTypeAll<GameObject>()
+        /*GameObject[] allPanelObjects = Resources.FindObjectsOfTypeAll<GameObject>()
         .Where(obj => obj.CompareTag("panel") && !UnityEditor.EditorUtility.IsPersistent(obj))
         .ToArray();
 
@@ -35,6 +35,19 @@ public class CardManager1 : MonoBehaviour
         {
             // Add the GameObject directly to the list
             cardPanels.Add(panelObject);
+        }
+*/
+        GameObject[] allPanelObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        // Clear the list before populating it again
+        cardPanels.Clear();
+
+        foreach (GameObject panelObject in allPanelObjects)
+        {
+            if (panelObject.CompareTag("panel") && panelObject.scene.rootCount != 0)
+            {
+                cardPanels.Add(panelObject);
+            }
         }
 
         // Check if all components are inactive
