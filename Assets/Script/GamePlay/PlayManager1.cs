@@ -44,6 +44,14 @@ public class PlayManager1 : MonoBehaviour
     public Player1 player3;
     public Player1 player4;
 
+    public CardOnCompletePanel1 cardOnCompletePanel1;
+    public CardOnCompletePanel1 cardOnCompletePanel2;
+    public CardOnCompletePanel1 cardOnCompletePanel3;
+    public CardOnCompletePanel1 cardOnCompletePanel4;
+    public CardOnCompletePanel1 cardOnCompletePanel5;
+    public CardOnCompletePanel1 cardOnCompletePanel6;
+    public CardOnCompletePanel1 restOfCardsNotification;
+
     public GameObject holderCanvas;
     public GameObject gameOverCanvas;
 
