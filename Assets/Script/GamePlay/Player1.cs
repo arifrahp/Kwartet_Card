@@ -138,27 +138,12 @@ public class Player1 : MonoBehaviour
     void Update()
     {
         PopulateCardIDs();
-
         CalculateScore();
+        NotificationOn4CardsShow();
     }
 
     public void SetOtherCardButtonsInteractable()
     {
-        Dictionary<int, int> cardIDCounts = new Dictionary<int, int>();
-
-        // Count the occurrences of each cardID
-        foreach (int cardID in cards)
-        {
-            if (cardIDCounts.ContainsKey(cardID))
-            {
-                cardIDCounts[cardID]++;
-            }
-            else
-            {
-                cardIDCounts[cardID] = 1;
-            }
-        }
-
         // Iterate through all players
         Player1[] players = FindObjectsOfType<Player1>();
         foreach (Player1 player in players)
@@ -199,32 +184,8 @@ public class Player1 : MonoBehaviour
             if (cardButton != null)
             {
                 // If the current player has 4 cards of the same ID, set buttons of those cards to be non-interactable
-                if (cardIDCounts.TryGetValue(cardObject.idCard, out int count) && count >= 4)
+                if (cards.Count(cardID => cardID == cardObject.idCard) >= 4)
                 {
-                    if (!isBot)
-                    {
-                        switch (cardObject.idCard)
-                        {
-                            case 1:
-                                playManager.cardOnCompletePanel1.ShowNotification();
-                                break;
-                            case 2:
-                                playManager.cardOnCompletePanel2.ShowNotification();
-                                break;
-                            case 3:
-                                playManager.cardOnCompletePanel3.ShowNotification();
-                                break;
-                            case 4:
-                                playManager.cardOnCompletePanel4.ShowNotification();
-                                break;
-                            case 5:
-                                playManager.cardOnCompletePanel5.ShowNotification();
-                                break;
-                            case 6:
-                                playManager.cardOnCompletePanel6.ShowNotification();
-                                break;
-                        }
-                    }
                     cardButton.interactable = false;
                 }
                 else
@@ -286,6 +247,62 @@ public class Player1 : MonoBehaviour
         {
             Button cardButton = card.GetComponentInChildren<Button>();
             cardButton.interactable = anyCardMatchesID;
+        }
+    }
+
+    public void NotificationOn4CardsShow()
+    {
+        Dictionary<int, int> cardIDCounts = new Dictionary<int, int>();
+
+        // Count the occurrences of each cardID
+        foreach (int cardID in cards)
+        {
+            if (cardIDCounts.ContainsKey(cardID))
+            {
+                cardIDCounts[cardID]++;
+            }
+            else
+            {
+                cardIDCounts[cardID] = 1;
+            }
+        }
+
+        foreach (Transform card in transform)
+        {
+            Button cardButton = card.GetComponentInChildren<Button>();
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
+
+            if (cardButton != null)
+            {
+                // If the current player has 4 cards of the same ID, set buttons of those cards to be non-interactable
+                if (cardIDCounts.TryGetValue(cardObject.idCard, out int count) && count >= 4)
+                {
+                    if (!isBot)
+                    {
+                        switch (cardObject.idCard)
+                        {
+                            case 1:
+                                playManager.cardOnCompletePanel1.ShowNotification();
+                                break;
+                            case 2:
+                                playManager.cardOnCompletePanel2.ShowNotification();
+                                break;
+                            case 3:
+                                playManager.cardOnCompletePanel3.ShowNotification();
+                                break;
+                            case 4:
+                                playManager.cardOnCompletePanel4.ShowNotification();
+                                break;
+                            case 5:
+                                playManager.cardOnCompletePanel5.ShowNotification();
+                                break;
+                            case 6:
+                                playManager.cardOnCompletePanel6.ShowNotification();
+                                break;
+                        }
+                    }
+                }
+            }
         }
     }
 

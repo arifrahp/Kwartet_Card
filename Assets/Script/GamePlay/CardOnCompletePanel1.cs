@@ -8,10 +8,12 @@ public class CardOnCompletePanel1 : MonoBehaviour
 {
     public Image thisPanel;
     public bool isAlreadyShowed = false;
+    public CardManager1 cardManager;
     void Start()
     {
-        thisPanel = GetComponent<Image>();
+        cardManager = FindAnyObjectByType<CardManager1>();
 
+        thisPanel = GetComponent<Image>();
         thisPanel.gameObject.SetActive(false);
     }
 
@@ -28,5 +30,13 @@ public class CardOnCompletePanel1 : MonoBehaviour
     public void NotificationPanelDeactivate()
     {
         thisPanel.gameObject.SetActive(false);
+    }
+
+    public void CloseAllPanel()
+    {
+        foreach (GameObject panel in cardManager.cardPanels)
+        {
+            panel.SetActive(false);
+        }
     }
 }

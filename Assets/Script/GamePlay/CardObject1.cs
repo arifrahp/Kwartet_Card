@@ -230,6 +230,7 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
+                            playManager.restOfCardsNotification.isAlreadyShowed = false;
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
@@ -277,6 +278,7 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
+                            playManager.restOfCardsNotification.isAlreadyShowed = false;
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
@@ -324,6 +326,7 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
+                            playManager.restOfCardsNotification.isAlreadyShowed = false;
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
@@ -371,6 +374,7 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
+                            playManager.restOfCardsNotification.isAlreadyShowed = false;
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
