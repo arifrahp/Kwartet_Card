@@ -282,8 +282,8 @@ public class CardObject1 : MonoBehaviour
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
-                        playManager.player1HaveChooseCard = true;
-                        playManager.player1HaveGuessCard = true;
+                        playManager.player2HaveChooseCard = true;
+                        playManager.player2HaveGuessCard = true;
                     }
 
                     playManager.player2HaveCheckCard = true;
@@ -330,8 +330,8 @@ public class CardObject1 : MonoBehaviour
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
-                        playManager.player1HaveChooseCard = true;
-                        playManager.player1HaveGuessCard = true;
+                        playManager.player3HaveChooseCard = true;
+                        playManager.player3HaveGuessCard = true;
                     }
 
                     playManager.player3HaveCheckCard = true;
@@ -378,8 +378,8 @@ public class CardObject1 : MonoBehaviour
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
-                        playManager.player1HaveChooseCard = true;
-                        playManager.player1HaveGuessCard = true;
+                        playManager.player4HaveChooseCard = true;
+                        playManager.player4HaveGuessCard = true;
                     }
 
                     playManager.player4HaveCheckCard = true;
