@@ -378,8 +378,8 @@ public class CardObject1 : MonoBehaviour
                             playManager.restOfCardsNotification.ShowNotification();
                         }
 
-                        playManager.player2HaveChooseCard = true;
-                        playManager.player2HaveGuessCard = true;
+                        playManager.player4HaveChooseCard = true;
+                        playManager.player4HaveGuessCard = true;
                     }
 
                     playManager.player4HaveCheckCard = true;
