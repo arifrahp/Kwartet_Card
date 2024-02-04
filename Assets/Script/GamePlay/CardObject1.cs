@@ -34,6 +34,8 @@ public class CardObject1 : MonoBehaviour
     public Vector3 originalPosition;
     public Quaternion originalRotation;
 
+    public List<Button> cardButtons;
+
     private bool isHovering;
     private void Start()
     {
@@ -89,6 +91,55 @@ public class CardObject1 : MonoBehaviour
         {
             transform.localPosition = originalPosition;
             transform.localRotation = originalRotation;
+        }
+
+        PlayManager1.State currentState = playManager.state;
+
+        CardObject1[] allCards = FindObjectsOfType<CardObject1>();
+
+        switch (currentState)
+        {
+            case PlayManager1.State.Player1Turn:
+                if (playManager.player1HaveCheckCard && playManager.player1HaveChooseCard && !playManager.player1HaveGuessCard)
+                {
+                    CompareAnswerWithCard(playManager.player1);
+                }
+                    break;
+            case PlayManager1.State.Player2Turn:
+                if (playManager.player2HaveCheckCard && playManager.player2HaveChooseCard && !playManager.player2HaveGuessCard)
+                {
+                    CompareAnswerWithCard(playManager.player2);
+                }
+                break;
+            case PlayManager1.State.Player3Turn:
+                if (playManager.player3HaveCheckCard && playManager.player3HaveChooseCard && !playManager.player3HaveGuessCard)
+                {
+                    CompareAnswerWithCard(playManager.player3);
+                }
+                break;
+            case PlayManager1.State.Player4Turn:
+                if (playManager.player4HaveCheckCard && playManager.player4HaveChooseCard && !playManager.player4HaveGuessCard)
+                {
+                    CompareAnswerWithCard(playManager.player4);
+                }
+                break;
+        }
+
+        GetAllButtonsInCard();
+    }
+
+    public void GetAllButtonsInCard()
+    {
+        Button[] allCardButtons = GetComponentsInChildren<Button>();
+
+        cardButtons.Clear();
+
+        if (allCardButtons != null)
+        {
+            foreach (Button buttonCard in allCardButtons)
+            {
+                cardButtons.Add(buttonCard);
+            }
         }
     }
 
@@ -210,6 +261,8 @@ public class CardObject1 : MonoBehaviour
 
                 if (!playManager.player1HaveCheckCard)
                 {
+                    player.cardIDHolder = idCard;
+                    player.GetCardsByCardID();
                     foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
@@ -258,6 +311,8 @@ public class CardObject1 : MonoBehaviour
 
                 if (!playManager.player2HaveCheckCard)
                 {
+                    player.cardIDHolder = idCard;
+                    player.GetCardsByCardID();
                     foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
@@ -306,6 +361,8 @@ public class CardObject1 : MonoBehaviour
 
                 if (!playManager.player3HaveCheckCard)
                 {
+                    player.cardIDHolder = idCard;
+                    player.GetCardsByCardID();
                     foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
@@ -354,6 +411,8 @@ public class CardObject1 : MonoBehaviour
 
                 if (!playManager.player4HaveCheckCard)
                 {
+                    player.cardIDHolder = idCard;
+                    player.GetCardsByCardID();
                     foreach (CardObject1 card in allCards)
                     {
                         if (card.idCard == idCard)
@@ -390,6 +449,40 @@ public class CardObject1 : MonoBehaviour
                 break;
         }
     }
+    
+    public void DoNothing()
+    {
+
+    }
+
+    public void CompareAnswerWithCard(Player1 chosenPlayer)
+    {
+        foreach (Button button in cardButtons)
+        {
+            bool foundMatch = false;  // Flag to check if a match is found for the current button
+
+            foreach (CardObject1 cardObject in chosenPlayer.cardsWithID)
+            {
+                if (cardObject.cardNumber == cardButtons.IndexOf(button))
+                {
+                    button.interactable = false;
+                    foundMatch = true;
+                    break;  // Exit the loop since a match is found
+                }
+            }
+
+            // If no match was found and the current button is at index 0, set it to not interactable
+            if (!foundMatch && cardButtons.IndexOf(button) == 0)
+            {
+                button.interactable = false;
+            }
+            else if (!foundMatch)
+            {
+                button.interactable = true;
+            }
+        }
+    }
+
 
     public void OnCardHoverEnter()
     {
