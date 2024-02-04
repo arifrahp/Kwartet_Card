@@ -131,7 +131,6 @@ public class PlayManager1 : MonoBehaviour
                 GameIsOver();
                 break;
         }
-        Debug.Log(state);
     }
 
     void HandleInitializationState()

@@ -15,11 +15,13 @@ public class Player1 : MonoBehaviour
     public bool isBot;
     public BotBeheaviour1 botBeheaviour;
     public int cardIDHolder;
+    public List<CardObject1> cardsWithID = new List<CardObject1>();
 
     public List<int> throwCards = new List<int>();
     public List<int> nonThrowCards = new List<int>();
 
     private PlayManager1 playManager;
+
 
     void Start()
     {
@@ -28,6 +30,20 @@ public class Player1 : MonoBehaviour
         playManager = FindAnyObjectByType<PlayManager1>();
     }
 
+    public void GetCardsByCardID()
+    {
+        cardsWithID.Clear();
+
+        foreach (Transform card in transform)
+        {
+            CardObject1 cardObject = card.GetComponent<CardObject1>();
+
+            if (cardObject != null && cardObject.idCard == cardIDHolder)
+            {
+                cardsWithID.Add(cardObject);
+            }
+        }
+    }
 
     public void PopulateCardIDs()
     {
