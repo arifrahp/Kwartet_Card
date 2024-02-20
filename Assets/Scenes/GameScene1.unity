@@ -172,6 +172,7 @@ MonoBehaviour:
   isBot: 1
   botBeheaviour: {fileID: 0}
   cardIDHolder: 0
+  cardsWithID: []
   throwCards: 
   nonThrowCards: 
 --- !u!1 &20990135
@@ -1928,6 +1929,7 @@ MonoBehaviour:
   isBot: 1
   botBeheaviour: {fileID: 0}
   cardIDHolder: 0
+  cardsWithID: []
   throwCards: 
   nonThrowCards: 
 --- !u!1 &513406808
@@ -2929,6 +2931,7 @@ MonoBehaviour:
   isBot: 0
   botBeheaviour: {fileID: 0}
   cardIDHolder: 0
+  cardsWithID: []
   throwCards: 
   nonThrowCards: 
 --- !u!1 &904400820
@@ -3476,7 +3479,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SISINGAMANGARAJA TERKUMPUL
+  m_text: "Sisingamangaraja melakukan perlawanan terhadap Belanda pada tahun 1887
+    di Batak berupa PERANG BATAK karena Belanda menguasai Batak. Karakter yang dapat
+    diteladani dari pahlawan nasional ini yaitu berani melawan\_perbudakan."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4824,7 +4829,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SULTAN AGENG TIRTAYASA TERKUMPUL
+  m_text: "Sultan Ageng Tirtayasa melakukan perlawanan terhadap Belanda pada tahun
+    1651 di Banten berupa PERANG BANTEN karena VOC memonopoli lada di Banten. Karakter
+    yang dapat diteladani dari pahlawan nasional ini yaitu gigih, berani dan\_ahli\_siasat."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5570,6 +5577,7 @@ MonoBehaviour:
   isBot: 1
   botBeheaviour: {fileID: 0}
   cardIDHolder: 0
+  cardsWithID: []
   throwCards: 
   nonThrowCards: 
 --- !u!1 &1455289574
@@ -6071,7 +6079,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PANGERAN ANTASARI TERKUMPUL
+  m_text: "Pangeran Antasari melakukan perlawanan terhadap Belanda pada tahun 1859
+    di Banjarmasin yaitu merebut benteng pangrangon karena Belanda melakukan kebijakan
+    kerja paksa masyarakan Banjar. Karakter yang dapat diteladani dari pahlawan nasional
+    ini yaitu sikap patriotisme, kokoh berdiri di atas keberanian melawan\_penjajah."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7063,7 +7074,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PATTIMURA TERKUMPUL
+  m_text: Pattimura melakukan perlawanan terhadap Belanda pada tahun 1816 di Maluku
+    berupa penyerangan benteng zeelandia karena Belanda memonopoli Maluku. Karakter
+    yang dapat diteladani dari pahlawan nasional ini yaitu cakap mengatur strategi
+    karena berkobar semangat nasionalismenya.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7299,7 +7313,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SULTAN HASSANUDDIN TERKUMPUL
+  m_text: "Sultan Hassanuddin melakukan perlawanan terhadap Belanda pada tahun 1660
+    di Makassar berupa PERANG MAKASSAR karena Politik Adu Domba yang dilakukan Belanda.
+    Karakter yang dapat diteladani dari pahlawan nasional ini yaitu tegas dan teguh\_pendirian."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7618,7 +7634,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PANGERAN DIPENOGORO TERKUMPUL
+  m_text: "Pangeran Diponegoro melakukan perlawanan terhadap Belanda pada tahun 1825-1830
+    di Yogyakarta berupa PERANG GERILYA karena Belanda ikut campur urusan kraton.
+    Karakter yang dapat diteladani dari pahlawan nasional ini yaitu religius, berilmu
+    dan bertanggung\_jawab."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
