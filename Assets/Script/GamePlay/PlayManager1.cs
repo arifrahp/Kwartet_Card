@@ -76,6 +76,11 @@ public class PlayManager1 : MonoBehaviour
 
     public Player1 turnPlayerHolder;
 
+    private Player1 player1Component;
+    private Player1 player2Component;
+    private Player1 player3Component;
+    private Player1 player4Component;
+
     public enum State
     {
         Initialization,
@@ -96,6 +101,11 @@ public class PlayManager1 : MonoBehaviour
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
         cardManager = FindAnyObjectByType<CardManager1>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        player1Component = GameObject.Find("Player").GetComponent<Player1>();
+        player2Component = GameObject.Find("Bot 1").GetComponent<Player1>();
+        player3Component = GameObject.Find("Bot 2").GetComponent<Player1>();
+        player4Component = GameObject.Find("Bot 3").GetComponent<Player1>();
 
         foreach (GameObject playerObject in playerObjects)
         {
@@ -126,7 +136,7 @@ public class PlayManager1 : MonoBehaviour
                     turnSFX.Play();
                     isPlayer1TurnSFXOn = true;
                 }
-                turnPlayerHolder = GameObject.Find("Player").GetComponent<Player1>();
+                turnPlayerHolder = player1Component;
                 HandlePlayer1TurnState();
                 break;
 
@@ -136,7 +146,7 @@ public class PlayManager1 : MonoBehaviour
                     turnSFX.Play();
                     isPlayer2TurnSFXOn = true;
                 }
-                turnPlayerHolder = GameObject.Find("Bot 1").GetComponent<Player1>();
+                turnPlayerHolder = player2Component;
                 HandlePlayer2TurnState();
                 break;
 
@@ -146,7 +156,7 @@ public class PlayManager1 : MonoBehaviour
                     turnSFX.Play();
                     isPlayer3TurnSFXOn = true;
                 }
-                turnPlayerHolder = GameObject.Find("Bot 2").GetComponent<Player1>();
+                turnPlayerHolder = player3Component;
                 HandlePlayer3TurnState();
                 break;
 
@@ -156,7 +166,7 @@ public class PlayManager1 : MonoBehaviour
                     turnSFX.Play();
                     isPlayer4TurnSFXOn = true;
                 }
-                turnPlayerHolder = GameObject.Find("Bot 3").GetComponent<Player1>();
+                turnPlayerHolder = player4Component;
                 HandlePlayer4TurnState();
                 break;
 
