@@ -36,6 +36,8 @@ public class CardObject1 : MonoBehaviour
 
     public List<Button> cardButtons;
 
+    public AudioSource cardSFX;
+
     private bool isHovering;
     private void Start()
     {
@@ -46,6 +48,7 @@ public class CardObject1 : MonoBehaviour
         player3 = GameObject.Find("Bot 2");
         player4 = GameObject.Find("Bot 3");
         restOfCards = GameObject.Find("RestOfCard");
+        cardSFX = GameObject.Find("CardSFX").GetComponent<AudioSource>();
         questionPanel.SetActive(false);
 
         cardHover = GetComponentInChildren<CardHover1>();
@@ -242,6 +245,11 @@ public class CardObject1 : MonoBehaviour
 
     public void CardOnTouch()
     {
+        if(!playManager.turnPlayerHolder.isBot)
+        {
+            cardSFX.Play();
+        }
+
         PlayManager1.State currentState = playManager.state;
 
         CardObject1[] allCards = FindObjectsOfType<CardObject1>();

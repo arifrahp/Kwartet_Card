@@ -22,7 +22,7 @@ public class CardOnCompletePanel1 : MonoBehaviour
         if(!isAlreadyShowed)
         {
             thisPanel.gameObject.SetActive(true);
-            Invoke("NotificationPanelDeactivate", 6f);
+            Invoke("NotificationPanelDeactivate", 13f);
             isAlreadyShowed = true;
         }
     }

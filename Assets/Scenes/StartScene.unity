@@ -664,8 +664,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3690410522719270519, guid: 71dbba74aaca3524390734e234e2c03e, type: 3}
       propertyPath: Mute
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3690410522719270519, guid: 71dbba74aaca3524390734e234e2c03e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3a6479fdd22f39842b122f0538231d02, type: 3}
     - target: {fileID: 3690410523092203744, guid: 71dbba74aaca3524390734e234e2c03e, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1562,6 +1566,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4996661137484942622, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996661137484942622, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1909651792}
@@ -1624,6 +1632,10 @@ PrefabInstance:
     - target: {fileID: 4996661137733949510, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996661137733949513, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
+      propertyPath: m_Value
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4996661137733949513, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1809,6 +1821,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0.3137255
       objectReference: {fileID: 0}
+    - target: {fileID: 4996661138472086633, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1909651792}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4996661136800695747, guid: 50c29823d93cfce40af5363ec57523a1, type: 3}

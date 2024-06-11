@@ -68,6 +68,14 @@ public class PlayManager1 : MonoBehaviour
     private BotBeheaviour1 botBeheaviour;
     private CardManager1 cardManager;
 
+    public AudioSource turnSFX;
+    public bool isPlayer1TurnSFXOn = false;
+    public bool isPlayer2TurnSFXOn = false;
+    public bool isPlayer3TurnSFXOn = false;
+    public bool isPlayer4TurnSFXOn = false;
+
+    public Player1 turnPlayerHolder;
+
     public enum State
     {
         Initialization,
@@ -80,6 +88,7 @@ public class PlayManager1 : MonoBehaviour
 
     void Start()
     {
+        turnSFX = GameObject.Find("TurnSFX").GetComponent<AudioSource>();
         gameOverCanvas.SetActive(false);
         holderCanvas.SetActive(false);
         state = State.Initialization;
@@ -112,18 +121,42 @@ public class PlayManager1 : MonoBehaviour
                 break;
 
             case State.Player1Turn:
+                if (!isPlayer1TurnSFXOn)
+                {
+                    turnSFX.Play();
+                    isPlayer1TurnSFXOn = true;
+                }
+                turnPlayerHolder = GameObject.Find("Player").GetComponent<Player1>();
                 HandlePlayer1TurnState();
                 break;
 
             case State.Player2Turn:
+                if (!isPlayer2TurnSFXOn)
+                {
+                    turnSFX.Play();
+                    isPlayer2TurnSFXOn = true;
+                }
+                turnPlayerHolder = GameObject.Find("Bot 1").GetComponent<Player1>();
                 HandlePlayer2TurnState();
                 break;
 
             case State.Player3Turn:
+                if (!isPlayer3TurnSFXOn)
+                {
+                    turnSFX.Play();
+                    isPlayer3TurnSFXOn = true;
+                }
+                turnPlayerHolder = GameObject.Find("Bot 2").GetComponent<Player1>();
                 HandlePlayer3TurnState();
                 break;
 
             case State.Player4Turn:
+                if (!isPlayer4TurnSFXOn)
+                {
+                    turnSFX.Play();
+                    isPlayer4TurnSFXOn = true;
+                }
+                turnPlayerHolder = GameObject.Find("Bot 3").GetComponent<Player1>();
                 HandlePlayer4TurnState();
                 break;
 
@@ -157,6 +190,11 @@ public class PlayManager1 : MonoBehaviour
                 player4HaveGuessCard = false;
                 player4HaveChooseCard = false;
 
+                isPlayer1TurnSFXOn = false;
+                isPlayer2TurnSFXOn = false;
+                isPlayer3TurnSFXOn = false;
+                isPlayer4TurnSFXOn = false;
+
                 Player1[] players = FindObjectsOfType<Player1>();
                 foreach (Player1 player in players)
                 {
@@ -188,7 +226,10 @@ public class PlayManager1 : MonoBehaviour
         else if (!player1.CheckCardIsZero())
         {
             if (!player1HaveCheckCard)
+            {
+                /*turnSFX.Play();*/
                 player1CheckCard.Invoke();
+            }
 
             if (!player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard && player1.CheckNoInteractableCards())
             {
@@ -199,6 +240,7 @@ public class PlayManager1 : MonoBehaviour
 
             if (player1.isBot)
             {
+                /*turnSFX.Play();*/
                 holderCanvas.SetActive(true);
                 if (!player1HaveCheckCard && !player1HaveChooseCard && !player1HaveGuessCard)
                 {
@@ -244,7 +286,10 @@ public class PlayManager1 : MonoBehaviour
         else if (!player2.CheckCardIsZero())
         {
             if (!player2HaveCheckCard)
+            {
+                /*turnSFX.Play();*/
                 player2CheckCard.Invoke();
+            }
 
             if (!player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard && player2.CheckNoInteractableCards())
             {
@@ -254,6 +299,7 @@ public class PlayManager1 : MonoBehaviour
 
             if (player2.isBot)
             {
+                /*turnSFX.Play()*/;
                 holderCanvas.SetActive(true);
                 if (!player2HaveCheckCard && !player2HaveChooseCard && !player2HaveGuessCard)
                 {
@@ -299,7 +345,10 @@ public class PlayManager1 : MonoBehaviour
         else if (!player3.CheckCardIsZero())
         {
             if (!player3HaveCheckCard)
+            {
+                /*turnSFX.Play();*/
                 player3CheckCard.Invoke();
+            }
 
             if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard && player3.CheckNoInteractableCards())
             {
@@ -309,6 +358,7 @@ public class PlayManager1 : MonoBehaviour
 
             if (player3.isBot)
             {
+                /*turnSFX.Play();*/
                 if (!player3HaveCheckCard && !player3HaveChooseCard && !player3HaveGuessCard)
                 {
                     holderCanvas.SetActive(true);
@@ -353,7 +403,10 @@ public class PlayManager1 : MonoBehaviour
         else if (!player4.CheckCardIsZero())
         {
             if (!player4HaveCheckCard)
+            {
+                /*turnSFX.Play();*/
                 player4CheckCard.Invoke();
+            }
 
             if (!player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard && player4.CheckNoInteractableCards())
             {
@@ -363,6 +416,7 @@ public class PlayManager1 : MonoBehaviour
 
             if (player4.isBot)
             {
+                /*turnSFX.Play();*/
                 holderCanvas.SetActive(true);
                 if (!player4HaveCheckCard && !player4HaveChooseCard && !player4HaveGuessCard)
                 {
