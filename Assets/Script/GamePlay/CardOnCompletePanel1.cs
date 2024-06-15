@@ -1,35 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CardOnCompletePanel1 : MonoBehaviour
 {
-    public Image thisPanel;
+    public Image thisImage;
+    public TMP_Text tittleText;
     public bool isAlreadyShowed = false;
     public CardManager1 cardManager;
+    public float timeAppear;
     void Start()
     {
         cardManager = FindAnyObjectByType<CardManager1>();
-
-        thisPanel = GetComponent<Image>();
-        thisPanel.gameObject.SetActive(false);
+        thisImage = GetComponent<Image>();
+        thisImage.gameObject.SetActive(false);
     }
 
     public void ShowNotification()
     {
         if(!isAlreadyShowed)
         {
-            thisPanel.gameObject.SetActive(true);
-            Invoke("NotificationPanelDeactivate", 13f);
+            thisImage.gameObject.SetActive(true);
+            Invoke("NotificationPanelDeactivate", timeAppear);
             isAlreadyShowed = true;
         }
     }
 
     public void NotificationPanelDeactivate()
     {
-        thisPanel.gameObject.SetActive(false);
+        thisImage.gameObject.SetActive(false);
     }
 
     public void CloseAllPanel()
