@@ -67,6 +67,7 @@ public class PlayManager1 : MonoBehaviour
 
     private BotBeheaviour1 botBeheaviour;
     private CardManager1 cardManager;
+    private SetPlayerNameBehaviour1 setPlayerNameBehaviour;
 
     public AudioSource turnSFX;
     public bool isPlayer1TurnSFXOn = false;
@@ -80,6 +81,9 @@ public class PlayManager1 : MonoBehaviour
     private Player1 player2Component;
     private Player1 player3Component;
     private Player1 player4Component;
+
+    public Color notInTurnColor;
+    public Color inTurnColor;
 
     public enum State
     {
@@ -100,6 +104,7 @@ public class PlayManager1 : MonoBehaviour
 
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
         cardManager = FindAnyObjectByType<CardManager1>();
+        setPlayerNameBehaviour = FindAnyObjectByType<SetPlayerNameBehaviour1>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
 
         player1Component = GameObject.Find("Player").GetComponent<Player1>();
