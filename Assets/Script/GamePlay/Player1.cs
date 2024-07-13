@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Player1 : MonoBehaviour
 {
+    public int id;
     public GameObject thisPlayer;
     public List<int> cards = new List<int>();
 
@@ -299,28 +300,28 @@ public class Player1 : MonoBehaviour
                         switch (cardObject.idCard)
                         {
                             case 1:
-                                playManager.cardOnCompletePanel1.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sisisngamangaraja";
-                                playManager.cardOnCompletePanel1.ShowNotification();
+                                playManager.cardNotifications[0].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sisisngamangaraja";
+                                playManager.cardNotifications[0].ShowNotification();
                                 break;
                             case 2:
-                                playManager.cardOnCompletePanel2.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sultan Ageng Tirtayasa";
-                                playManager.cardOnCompletePanel2.ShowNotification();
+                                playManager.cardNotifications[1].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sultan Ageng Tirtayasa";
+                                playManager.cardNotifications[1].ShowNotification();
                                 break;
                             case 3:
-                                playManager.cardOnCompletePanel3.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pangeran Diponegoro";
-                                playManager.cardOnCompletePanel3.ShowNotification();
+                                playManager.cardNotifications[2].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pangeran Diponegoro";
+                                playManager.cardNotifications[2].ShowNotification();
                                 break;
                             case 4:
-                                playManager.cardOnCompletePanel4.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pangeran Antasari";
-                                playManager.cardOnCompletePanel4.ShowNotification();
+                                playManager.cardNotifications[3].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pangeran Antasari";
+                                playManager.cardNotifications[3].ShowNotification();
                                 break;
                             case 5:
-                                playManager.cardOnCompletePanel5.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sultan Hassanuddin";
-                                playManager.cardOnCompletePanel5.ShowNotification();
+                                playManager.cardNotifications[4].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Sultan Hassanuddin";
+                                playManager.cardNotifications[4].ShowNotification();
                                 break;
                             case 6:
-                                playManager.cardOnCompletePanel6.tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pattimura";
-                                playManager.cardOnCompletePanel6.ShowNotification();
+                                playManager.cardNotifications[5].tittleText.text = "Kamu Telah Mengumpulkan Kartu Pangeran Pattimura";
+                                playManager.cardNotifications[5].ShowNotification();
                                 break;
                         }
                     }
@@ -329,28 +330,28 @@ public class Player1 : MonoBehaviour
                         switch (cardObject.idCard)
                         {
                             case 1:
-                                playManager.cardOnCompletePanel1.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Sisisngamangaraja";
-                                playManager.cardOnCompletePanel1.ShowNotification();
+                                playManager.cardNotifications[0].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Sisisngamangaraja";
+                                playManager.cardNotifications[0].ShowNotification();
                                 break;
                             case 2:
-                                playManager.cardOnCompletePanel2.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Sultan Ageng Tirtayasa";
-                                playManager.cardOnCompletePanel2.ShowNotification();
+                                playManager.cardNotifications[1].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Sultan Ageng Tirtayasa";
+                                playManager.cardNotifications[1].ShowNotification();
                                 break;
                             case 3:
-                                playManager.cardOnCompletePanel3.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Pangeran Diponegoro";
-                                playManager.cardOnCompletePanel3.ShowNotification();
+                                playManager.cardNotifications[2].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Pangeran Diponegoro";
+                                playManager.cardNotifications[2].ShowNotification();
                                 break;
                             case 4:
-                                playManager.cardOnCompletePanel4.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Pangeran Antasari";
-                                playManager.cardOnCompletePanel4.ShowNotification();
+                                playManager.cardNotifications[3].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Pangeran Antasari";
+                                playManager.cardNotifications[3].ShowNotification();
                                 break;
                             case 5:
-                                playManager.cardOnCompletePanel5.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Sultan Hassanuddin";
-                                playManager.cardOnCompletePanel5.ShowNotification();
+                                playManager.cardNotifications[4].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Sultan Hassanuddin";
+                                playManager.cardNotifications[4].ShowNotification();
                                 break;
                             case 6:
-                                playManager.cardOnCompletePanel6.tittleText.text = thisPlayer.name + "Telah Mengumpulkan Kartu Pangeran Pattimura";
-                                playManager.cardOnCompletePanel6.ShowNotification();
+                                playManager.cardNotifications[5].tittleText.text = thisPlayer.name + " Telah Mengumpulkan Kartu Pangeran Pattimura";
+                                playManager.cardNotifications[5].ShowNotification();
                                 break;
                         }
                     }

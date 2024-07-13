@@ -44,13 +44,16 @@ public class PlayManager1 : MonoBehaviour
     public Player1 player3;
     public Player1 player4;
 
-    public CardOnCompletePanel1 cardOnCompletePanel1;
+    /*public CardOnCompletePanel1 cardOnCompletePanel1;
     public CardOnCompletePanel1 cardOnCompletePanel2;
     public CardOnCompletePanel1 cardOnCompletePanel3;
     public CardOnCompletePanel1 cardOnCompletePanel4;
     public CardOnCompletePanel1 cardOnCompletePanel5;
     public CardOnCompletePanel1 cardOnCompletePanel6;
     public CardOnCompletePanel1 restOfCardsNotification;
+    public CardOnCompletePanel1 playerChampionNotification;*/
+
+    public List<CardOnCompletePanel1> cardNotifications = new List<CardOnCompletePanel1>();
 
     public GameObject holderCanvas;
     public GameObject gameOverCanvas;
@@ -480,7 +483,20 @@ public class PlayManager1 : MonoBehaviour
         }
 
         PositionNaming();
-        gameOverCanvas.SetActive(true);
+        if (allPlayers[0].id == 1)
+        {
+            cardNotifications[6].ShowNotification();
+            if (!cardNotifications[6].thisImage.gameObject.active)
+            {
+                gameOverCanvas.SetActive(true);
+                AllCardNotificationInnactive();
+            }
+        }
+        else
+        {
+            gameOverCanvas.SetActive(true);
+            AllCardNotificationInnactive();
+        }
     }
 
     GameObject GetWinnerGameObject(int position)
@@ -534,5 +550,14 @@ public class PlayManager1 : MonoBehaviour
         winner2Text.text = allPlayers[1].transform.name;
         winner3Text.text = allPlayers[2].transform.name;
         winner4Text.text = allPlayers[3].transform.name;
+    }
+
+    public void AllCardNotificationInnactive()
+    {
+        foreach (CardOnCompletePanel1 cardNotification in cardNotifications)
+        {
+            cardNotification.isAlreadyShowed = true;
+            cardNotification.NotificationPanelDeactivate();
+        }
     }
 }
