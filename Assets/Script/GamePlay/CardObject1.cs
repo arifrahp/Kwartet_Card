@@ -10,6 +10,8 @@ public class CardObject1 : MonoBehaviour
 {
     public bool isThrow = false;
     public Image cardImage;
+    public Sprite originImage;
+    public Sprite closedImage;
 
     public GameObject player1;
     public GameObject player2;
@@ -43,6 +45,13 @@ public class CardObject1 : MonoBehaviour
     {
         //cardTouchButton = GetComponentInChildren<Button>();
         playManager = FindAnyObjectByType<PlayManager1>();
+        cardImage = GetComponentInChildren<Image>();
+
+        originImage = cardImage.sprite;
+
+        string spritePath = "UsedInGame/belakang";
+        closedImage = Resources.Load<Sprite>(spritePath);
+
         player1 = GameObject.Find("Player");
         player2 = GameObject.Find("Bot 1");
         player3 = GameObject.Find("Bot 2");
@@ -52,7 +61,6 @@ public class CardObject1 : MonoBehaviour
         questionPanel.SetActive(false);
 
         cardHover = GetComponentInChildren<CardHover1>();
-        cardImage = GetComponentInChildren<Image>();
         botBeheaviour = FindAnyObjectByType<BotBeheaviour1>();
         restOfCard = FindAnyObjectByType<RestOfCard1>();
     }
@@ -71,16 +79,16 @@ public class CardObject1 : MonoBehaviour
         {
             if (player.isBot)
             {
-                cardImage.color = Color.black;
+                cardImage.sprite = closedImage;
             }
             if (!player.isBot)
             {
-                cardImage.color = Color.white;
+                cardImage.sprite = originImage;
             }
         }
         if (this.gameObject.transform.parent == restOfCards.transform)
         {
-            cardImage.color = Color.black;
+            cardImage.sprite = closedImage;
             cardTouchButton.interactable = false;
         }
 
@@ -291,8 +299,8 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
-                            playManager.restOfCardsNotification.isAlreadyShowed = false;
-                            playManager.restOfCardsNotification.ShowNotification();
+                            playManager.cardNotifications[7].isAlreadyShowed = false;
+                            playManager.cardNotifications[7].ShowNotification();
                         }
 
                         playManager.player1HaveChooseCard = true;
@@ -341,8 +349,8 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
-                            playManager.restOfCardsNotification.isAlreadyShowed = false;
-                            playManager.restOfCardsNotification.ShowNotification();
+                            playManager.cardNotifications[7].isAlreadyShowed = false;
+                            playManager.cardNotifications[7].ShowNotification();
                         }
 
                         playManager.player2HaveChooseCard = true;
@@ -391,8 +399,8 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
-                            playManager.restOfCardsNotification.isAlreadyShowed = false;
-                            playManager.restOfCardsNotification.ShowNotification();
+                            playManager.cardNotifications[7].isAlreadyShowed = false;
+                            playManager.cardNotifications[7].ShowNotification();
                         }
 
                         playManager.player3HaveChooseCard = true;
@@ -441,8 +449,8 @@ public class CardObject1 : MonoBehaviour
                         if (restOfCard.cards.Count > 0)
                         {
                             restOfCard.CardGoesToPlayer();
-                            playManager.restOfCardsNotification.isAlreadyShowed = false;
-                            playManager.restOfCardsNotification.ShowNotification();
+                            playManager.cardNotifications[7].isAlreadyShowed = false;
+                            playManager.cardNotifications[7].ShowNotification();
                         }
 
                         playManager.player4HaveChooseCard = true;

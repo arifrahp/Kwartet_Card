@@ -20,10 +20,10 @@ public class SetPlayerNameBehaviour1 : MonoBehaviour
 
     public bool isShow = false;
 
-    public TMP_Text player1InputField;
-    public TMP_Text player2InputField;
-    public TMP_Text player3InputField;
-    public TMP_Text player4InputField;
+    public InputField player1InputField;
+    public InputField player2InputField;
+    public InputField player3InputField;
+    public InputField player4InputField;
 
     private const int MaxNameLength = 8;
 
@@ -31,6 +31,7 @@ public class SetPlayerNameBehaviour1 : MonoBehaviour
 
     public Color notInTurnColor;
     public Color inTurnColor;
+
     private void Start()
     {
         playManager = FindAnyObjectByType<PlayManager1>();
@@ -63,7 +64,7 @@ public class SetPlayerNameBehaviour1 : MonoBehaviour
             playerObject.name = player1Name;
             playerNameCard.text = player1Name;
         }
-        else if(player1InputField.text.Length < 2)
+        else if (player1InputField.text.Length < 2)
         {
             player1Name = "Player";
             playerNameCard.text = "Player";

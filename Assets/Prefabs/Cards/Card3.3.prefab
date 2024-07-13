@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isThrow: 0
   cardImage: {fileID: 0}
+  originImage: {fileID: 0}
+  closedImage: {fileID: 21300000, guid: db69c5fc3933d5f4d84163aa05be74ff, type: 3}
   player1: {fileID: 0}
   player2: {fileID: 0}
   player3: {fileID: 0}
@@ -63,6 +65,7 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   cardButtons: []
+  cardSFX: {fileID: 0}
 --- !u!1 &311035531977424848
 GameObject:
   m_ObjectHideFlags: 0
